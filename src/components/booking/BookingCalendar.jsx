@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { DateRange } from 'react-date-range';
-import { addDays, format, differenceInCalendarDays, isSameDay, isWithinInterval, addHours } from 'date-fns';
-import { Download, Calendar, Info, AlertCircle, Clock, CreditCard, Check } from 'lucide-react';
+import React, { useState, useEffect, useMemo, memo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, ChevronLeft, ChevronRight, Users, MapPin, Star, Bed, Bath, Wifi, Coffee, Car, Shield, Clock, CheckCircle } from 'lucide-react';
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, isAfter, isBefore, addDays, differenceInCalendarDays } from 'date-fns';
+import { useBookingService } from '../../hooks/useBookingService';
 
 const BookingCalendar = ({ property, onBookingComplete }) => {
   const [dateRange, setDateRange] = useState([
@@ -15,31 +16,61 @@ const BookingCalendar = ({ property, onBookingComplete }) => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [depositDueTime, setDepositDueTime] = useState(null);
-  const [bookingStatus, setBookingStatus] = useState('pending'); // pending, confirmed, cancelled
-  const [realTimeBookings, setRealTimeBookings] = useState([]);
+  const [bookingStatus, setBookingStatus] = useState('pending');
+  const [bookedDates, setBookedDates] = useState([]);
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
 
-  // Mock data for booked dates - replace with actual data from backend
-  const bookedDates = [
-    { start: addDays(new Date(), 5), end: addDays(new Date(), 7) },
-    { start: addDays(new Date(), 15), end: addDays(new Date(), 18) }
-  ];
+  // Use booking service for real-time updates
+  const { 
+    createBooking, 
+    getBookedDates, 
+    checkAvailability, 
+    subscribeToPropertyBookings,
+    loading: bookingLoading 
+  } = useBookingService();
 
-  // Simulate real-time updates
+  // Subscribe to real-time booking updates
   useEffect(() => {
-    const interval = setInterval(() => {
-      // This would be replaced with actual WebSocket or API polling
-      setRealTimeBookings(prev => [...prev]);
-    }, 30000); // Update every 30 seconds
+    const unsubscribe = subscribeToPropertyBookings(property.id, (bookings) => {
+      const dates = bookings.map(booking => ({
+        start: booking.checkIn instanceof Date ? booking.checkIn : booking.checkIn.toDate(),
+        end: booking.checkOut instanceof Date ? booking.checkOut : booking.checkOut.toDate(),
+        status: booking.status,
+        bookingId: booking.id
+      }));
+      setBookedDates(dates);
+    });
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [property.id, subscribeToPropertyBookings]);
 
-  const nights = differenceInCalendarDays(dateRange[0].endDate, dateRange[0].startDate);
-  const pricePerNight = property.price;
-  const totalCost = nights * pricePerNight;
-  const serviceFee = totalCost * 0.1; // 10% service fee
-  const depositAmount = totalCost * 0.3; // 30% deposit
-  const finalTotal = totalCost + serviceFee;
+  // Load initial booked dates
+  useEffect(() => {
+    const loadBookedDates = async () => {
+      try {
+        const dates = await getBookedDates(property.id);
+        setBookedDates(dates);
+      } catch (error) {
+        console.error('Error loading booked dates:', error);
+      }
+    };
+    
+    loadBookedDates();
+  }, [property.id, getBookedDates]);
+
+  const nights = useMemo(() => 
+    differenceInCalendarDays(dateRange[0].endDate, dateRange[0].startDate), 
+    [dateRange]
+  );
+
+  const pricing = useMemo(() => {
+    const basePrice = property.price * nights;
+    const serviceFee = basePrice * 0.1;
+    const totalPrice = basePrice + serviceFee;
+    return { basePrice, serviceFee, totalPrice };
+  }, [property.price, nights]);
 
   // Calculate deposit due time (6 hours before check-in)
   useEffect(() => {
@@ -58,7 +89,7 @@ const BookingCalendar = ({ property, onBookingComplete }) => {
     );
   };
 
-  // Custom day content renderer
+  // Enhanced day content renderer with real-time updates
   const dayContentRenderer = (date) => {
     const isBooked = isDateBooked(date);
     const isSelected = isWithinInterval(date, { 
@@ -67,26 +98,45 @@ const BookingCalendar = ({ property, onBookingComplete }) => {
     });
 
     return (
-      <div 
-        className={`relative w-full h-full p-2 ${
+      <motion.div 
+        initial={{ opacity: 0.8 }}
+        animate={{ opacity: 1 }}
+        className={`relative w-full h-full p-2 transition-all duration-300 ${
           isBooked 
-            ? 'bg-red-500/10' 
+            ? 'bg-red-500/20 cursor-not-allowed' 
             : isSelected 
-              ? 'bg-yellow-400/20' 
-              : ''
+              ? 'bg-blue-400/30' 
+              : 'hover:bg-blue-400/10'
         }`}
       >
-        <span className={`${
-          isBooked ? 'text-red-500' : isSelected ? 'text-yellow-400' : ''
+        <span className={`relative ${
+          isBooked 
+            ? 'text-red-400 line-through' 
+            : isSelected 
+              ? 'text-blue-400 font-bold' 
+              : 'text-gray-300'
         }`}>
           {date.getDate()}
+          {isBooked && (
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 h-0.5 bg-red-500 top-1/2 transform -translate-y-1/2"
+            />
+          )}
         </span>
         {isBooked && (
-          <div className="absolute bottom-1 left-1/2 -translate-x-1/2">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
-          </div>
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="absolute bottom-1 left-1/2 -translate-x-1/2"
+          >
+            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     );
   };
 
@@ -119,52 +169,48 @@ Thank you for choosing Queensy!
     document.body.removeChild(a);
   };
 
-  const handleBooking = () => {
-    // Check if selected dates overlap with booked dates
-    const hasConflict = bookedDates.some(booking =>
-      isWithinInterval(dateRange[0].startDate, { start: booking.start, end: booking.end }) ||
-      isWithinInterval(dateRange[0].endDate, { start: booking.start, end: booking.end })
-    );
-
-    if (hasConflict) {
-      alert('Selected dates are not available. Please choose different dates.');
-      return;
-    }
-
-    // Validate minimum stay
-    if (nights < 1) {
-      alert('Please select at least one night.');
-      return;
-    }
-
-    // Create booking object
-    const bookingDetails = {
-      propertyId: property.id,
-      propertyTitle: property.title,
-      checkIn: dateRange[0].startDate,
-      checkOut: dateRange[0].endDate,
-      nights,
-      totalCost,
-      serviceFee,
-      depositAmount,
-      depositDueTime,
-      finalTotal,
-      status: 'pending_deposit',
-      bookingId: `BK-${Date.now()}`,
-      createdAt: new Date()
-    };
-
-    // Here you would typically save to your backend
-    console.log('Booking created:', bookingDetails);
+  const handleBooking = useCallback(async () => {
+    setIsCheckingAvailability(true);
     
-    // Simulate real-time update
-    setRealTimeBookings(prev => [...prev, bookingDetails]);
-    
-    setBookingConfirmed(true);
-    if (onBookingComplete) {
-      onBookingComplete(bookingDetails);
+    try {
+      // Check availability before booking
+      const isAvailable = await checkAvailability(property.id, dateRange[0].startDate, dateRange[0].endDate);
+      
+      if (!isAvailable) {
+        alert('Selected dates are no longer available. Please choose different dates.');
+        setIsCheckingAvailability(false);
+        return;
+      }
+
+      if (nights < 1) {
+        alert('Please select at least one night.');
+        setIsCheckingAvailability(false);
+        return;
+      }
+
+      const bookingDetails = {
+        propertyId: property.id,
+        checkIn: dateRange[0].startDate,
+        checkOut: dateRange[0].endDate,
+        guests: 2, // Default guests
+        totalPrice: pricing.totalPrice,
+        status: 'confirmed',
+        createdAt: new Date()
+      };
+
+      const createdBooking = await createBooking(bookingDetails);
+      setBookingConfirmed(true);
+      
+      if (onBookingComplete) {
+        onBookingComplete(createdBooking);
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+      alert('Failed to create booking. Please try again.');
+    } finally {
+      setIsCheckingAvailability(false);
     }
-  };
+  }, [property.id, dateRange, nights, pricing.totalPrice, checkAvailability, createBooking, onBookingComplete]);
 
   const handleDepositPayment = () => {
     // Simulate payment processing
@@ -177,8 +223,8 @@ Thank you for choosing Queensy!
       bookingConfirmed ? 'bg-green-900/20 border border-green-500/30' : 'bg-black/20 border border-gray-700/30'
     }`}>
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-playfair text-yellow-400">Book Your Stay</h3>
-        <div className="flex items-center gap-2 text-yellow-100">
+        <h3 className="text-2xl font-playfair text-blue-400">Book Your Stay</h3>
+        <div className="flex items-center gap-2 text-blue-100">
           <Calendar className="w-5 h-5" />
           <span className="text-sm">Real-time availability</span>
         </div>
@@ -190,14 +236,14 @@ Thank you for choosing Queensy!
           onClick={() => setShowCalendar(!showCalendar)}
           className={`w-full flex items-center justify-between p-4 rounded-lg border-2 transition-colors ${
             showCalendar 
-              ? 'border-yellow-400 bg-yellow-400/10' 
-              : 'border-gray-600 hover:border-yellow-400'
+              ? 'border-blue-400 bg-blue-400/10' 
+              : 'border-gray-600 hover:border-blue-400'
           }`}
         >
-          <span className="text-yellow-100">
+          <span className="text-blue-100">
             {format(dateRange[0].startDate, 'MMM dd')} - {format(dateRange[0].endDate, 'MMM dd, yyyy')}
           </span>
-          <Calendar className="w-5 h-5 text-yellow-400" />
+          <Calendar className="w-5 h-5 text-blue-400" />
         </button>
         
         {showCalendar && (
@@ -208,6 +254,7 @@ Thank you for choosing Queensy!
               minDate={new Date()}
               dayContentRenderer={dayContentRenderer}
               className="custom-calendar"
+              rangeColors={['#3b82f6']}
             />
           </div>
         )}
@@ -215,41 +262,31 @@ Thank you for choosing Queensy!
 
       {/* Booking Summary */}
       <div className="space-y-4 mb-6">
-        <div className="flex justify-between text-yellow-100">
-          <span>Price per night:</span>
-          <span>KES {pricePerNight.toLocaleString()}</span>
+        <div className="flex justify-between text-gray-300">
+          <span>Base Price ({nights} nights)</span>
+          <span>KES {pricing.basePrice.toLocaleString()}</span>
         </div>
-        <div className="flex justify-between text-yellow-100">
-          <span>Nights:</span>
-          <span>{nights}</span>
+        <div className="flex justify-between text-gray-300">
+          <span>Service Fee</span>
+          <span>KES {pricing.serviceFee.toLocaleString()}</span>
         </div>
-        <div className="flex justify-between text-yellow-100">
-          <span>Subtotal:</span>
-          <span>KES {totalCost.toLocaleString()}</span>
-        </div>
-        <div className="flex justify-between text-yellow-100">
-          <span>Service fee:</span>
-          <span>KES {serviceFee.toLocaleString()}</span>
-        </div>
-        <div className="border-t border-gray-600 pt-2">
-          <div className="flex justify-between text-yellow-400 font-bold">
-            <span>Total:</span>
-            <span>KES {finalTotal.toLocaleString()}</span>
-          </div>
+        <div className="flex justify-between text-white font-bold pt-2 border-t border-white/10">
+          <span>Total</span>
+          <span>KES {pricing.totalPrice.toLocaleString()}</span>
         </div>
       </div>
 
       {/* Deposit Information */}
       {depositDueTime && (
-        <div className="mb-6 p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
+        <div className="mb-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
-            <CreditCard className="w-5 h-5 text-yellow-400" />
-            <span className="text-yellow-400 font-medium">Deposit Required</span>
+            <CreditCard className="w-5 h-5 text-blue-400" />
+            <span className="text-blue-400 font-medium">Deposit Required</span>
           </div>
-          <div className="text-yellow-100 text-sm space-y-1">
+          <div className="text-blue-100 text-sm space-y-1">
             <div>Amount: KES {depositAmount.toLocaleString()}</div>
             <div>Due: {format(depositDueTime, 'PPP p')}</div>
-            <div className="flex items-center gap-1 text-yellow-300">
+            <div className="flex items-center gap-1 text-blue-300">
               <Clock className="w-4 h-4" />
               <span>6 hours before check-in</span>
             </div>
@@ -259,12 +296,39 @@ Thank you for choosing Queensy!
 
       {/* Booking Actions */}
       {!bookingConfirmed ? (
-        <button
+        <motion.button
           onClick={handleBooking}
-          className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105"
+          disabled={isCheckingAvailability || bookingLoading}
+          className={`btn btn-primary w-full py-4 text-lg font-bold transition-all duration-300 ${
+            isCheckingAvailability || bookingLoading 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'hover:shadow-lg transform hover:scale-105'
+          }`}
+          whileHover={!isCheckingAvailability ? { scale: 1.02 } : {}}
+          whileTap={!isCheckingAvailability ? { scale: 0.98 } : {}}
         >
-          Book Now
-        </button>
+          {isCheckingAvailability ? (
+            <span className="flex items-center justify-center gap-2">
+              <motion.span
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="loading-spinner"
+              />
+              Checking Availability...
+            </span>
+          ) : bookingLoading ? (
+            <span className="flex items-center justify-center gap-2">
+              <motion.span
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="loading-spinner"
+              />
+              Creating Booking...
+            </span>
+          ) : (
+            'Book Now'
+          )}
+        </motion.button>
       ) : (
         <div className="space-y-3">
           <div className="p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
@@ -297,7 +361,7 @@ Thank you for choosing Queensy!
           
           <button
             onClick={generateReceipt}
-            className="w-full border border-yellow-400 text-yellow-400 font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-yellow-400/10"
+            className="w-full border border-blue-400 text-blue-400 font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-blue-400/10"
           >
             <Download className="w-5 h-5 inline mr-2" />
             Download Receipt
@@ -319,4 +383,4 @@ Thank you for choosing Queensy!
   );
 };
 
-export default BookingCalendar;
+export default memo(BookingCalendar);

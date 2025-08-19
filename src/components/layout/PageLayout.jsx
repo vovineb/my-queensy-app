@@ -17,7 +17,7 @@ const PageLayout = ({ children, title, subtitle }) => {
         >
           {title && (
             <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
-              isDark ? 'text-yellow-400' : 'text-yellow-600'
+              isDark ? 'text-blue-400' : 'text-blue-600'
             } font-playfair`}>
               {title}
             </h1>

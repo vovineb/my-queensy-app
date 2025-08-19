@@ -57,7 +57,7 @@ const SignUpForm = ({ onSubmit }) => {
     setIsSubmitting(false);
   };
 
-  const inputClasses = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors";
+  const inputClasses = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors";
   const labelClasses = "flex items-center gap-2 text-gray-300 text-sm font-medium mb-1";
 
   return (
@@ -159,10 +159,10 @@ const SignUpForm = ({ onSubmit }) => {
       <motion.button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full py-3 rounded-lg font-medium transition-colors ${
+        className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
           isSubmitting
             ? 'bg-gray-500 cursor-not-allowed'
-            : 'bg-yellow-400 hover:bg-yellow-500 text-black'
+            : 'bg-blue-400 hover:bg-blue-500 text-black'
         }`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}

@@ -1,38 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { use3DTypeEffect } from '../../hooks/use3DTypeEffect';
 
 const LoadingScreen = () => {
-  const loadingText = use3DTypeEffect(
-    ["Thank you for the wait. I am sure it is worth it."],
-    80,
-    40,
-    3000
-  );
-
   return (
-    <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
-      <div className="text-center">
-        <motion.h2
-          className="text-2xl md:text-3xl font-playfair text-yellow-400 mb-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+    <div className="min-h-screen bg-gradient-to-br from-black via-blue-900 to-blue-800 flex items-center justify-center">
+      <div className="text-center space-y-8">
+        {/* Logo/Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="text-2xl md:text-3xl font-playfair text-blue-400 mb-6"
         >
-          {loadingText}
-          <span className="animate-blink">|</span>
-        </motion.h2>
-        
+          Queensy
+        </motion.h1>
+
+        {/* Loading Bar */}
         <motion.div
-          className="w-48 h-1 bg-yellow-900 rounded-full mx-auto overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-48 h-1 bg-blue-900 rounded-full mx-auto overflow-hidden"
         >
           <motion.div
-            className="h-full bg-yellow-400"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
+            className="h-full bg-blue-400"
+            animate={{
+              width: ["0%", "100%"]
+            }}
             transition={{
               duration: 2,
               repeat: Infinity,
@@ -40,6 +34,16 @@ const LoadingScreen = () => {
             }}
           />
         </motion.div>
+
+        {/* Loading Text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-blue-200 text-lg"
+        >
+          Loading your luxury experience...
+        </motion.p>
       </div>
     </div>
   );

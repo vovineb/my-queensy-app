@@ -1,151 +1,158 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import PropertyCalendar from './PropertyCalendar';
+import { MapPin, Bed, Bath, Star, Wifi, Coffee, Car, Shield } from 'lucide-react';
+import BookingModal from '../booking/BookingModal';
 
 const PropertyCard = ({ property, isReturningCustomer = false }) => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const navigate = useNavigate();
-  const { isDark } = useContext(ThemeContext);
-  const [showBooking, setShowBooking] = useState(false);
+
+  const amenities = [
+    { icon: Wifi, label: 'WiFi' },
+    { icon: Coffee, label: 'Coffee' },
+    { icon: Car, label: 'Parking' },
+    { icon: Shield, label: 'Security' }
+  ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className={`rounded-2xl overflow-hidden transition-all duration-500 group ${
-        isDark 
-          ? 'bg-gray-800/50 backdrop-blur-sm border border-gray-700/50' 
-          : 'bg-white/80 backdrop-blur-sm border border-gray-200/50'
-      }`}
-    >
-      {/* Image Section */}
-      <div className="relative aspect-[16/9] overflow-hidden">
-        <motion.img
-          src={property.image}
-          alt={property.title}
-          className="w-full h-full object-cover"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
-        />
-        <div className={`absolute inset-0 ${
-          isDark ? 'bg-gradient-to-t from-gray-900/90 to-transparent' 
-                : 'bg-gradient-to-t from-gray-50/90 to-transparent'
-        }`} />
-        
-        {/* Property Details Badge */}
-        <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-          <div className="property-amenity">
-            {property.bedrooms} Bedroom{property.bedrooms > 1 ? 's' : ''}
+    <>
+      <motion.div
+        whileHover={{ y: -12, scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="bg-white dark:bg-navy-800 rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group border border-ivory-200 dark:border-navy-700/40 mb-12"
+      >
+        {/* Image Container with Enhanced Spacing */}
+        <div className="relative h-80 overflow-hidden">
+          <img 
+            src={property.images?.[0] || property.image} 
+            alt={property.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          />
+          
+          {/* Enhanced Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+          
+          {/* Price Tag with Better Spacing - Blue/Green gradient for visibility */}
+          <div className="absolute top-6 right-6">
+            <div className="px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold rounded-2xl shadow-lg">
+              KES {property.price.toLocaleString()}/night
+            </div>
           </div>
-          <div className="property-amenity">
-            {property.bathrooms} Bath{property.bathrooms > 1 ? 's' : ''}
-          </div>
-          <div className="property-amenity">
-            Up to {property.guests} Guests
+          
+          {/* Badge with Enhanced Spacing */}
+          <div className="absolute top-6 left-6">
+            <div className="px-4 py-2 bg-oceanic-600 text-white font-semibold rounded-xl shadow-lg">
+              {property.type || 'Premium'}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Content Section */}
-      <div className="p-8 space-y-6">
-        {/* Title */}
-        <h3 className={`text-2xl font-bold font-playfair group-hover:text-yellow-400 transition-colors`}>
-          {property.title}
-        </h3>
+        {/* Content with Improved Spacing */}
+        <div className="p-10 space-y-8">
+          {/* Title and Rating */}
+          <div className="space-y-5">
+            <h3 className="text-3xl font-bold text-black dark:text-oceanic-200 leading-tight tracking-wide">
+              {property.name}
+            </h3>
+            
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-6 h-6 text-yellow-500 fill-current" />
+                ))}
+              </div>
+              <span className="text-gray-600 dark:text-oceanic-300 font-medium text-lg">4.9 (128 reviews)</span>
+            </div>
+          </div>
 
-        {/* Description */}
-        <p className={`text-base leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-          {property.shortDescription}
-        </p>
+          {/* Description with Better Typography */}
+          <p className="text-black dark:text-oceanic-200 text-xl leading-relaxed font-medium tracking-wide">
+            {property.description}
+          </p>
 
-        {/* Amenities */}
-        <div className="flex flex-wrap gap-2">
-          {property.amenities.slice(0, 4).map((amenity, index) => (
-            <span
-              key={index}
-              className="property-amenity"
-            >
-              {amenity}
-            </span>
-          ))}
-          {property.amenities.length > 4 && (
-            <span className="property-amenity">
-              +{property.amenities.length - 4} more
-            </span>
-          )}
-        </div>
+          {/* Amenities Grid with Enhanced Spacing */}
+          <div className="grid grid-cols-2 gap-6 pt-6">
+            {amenities.map((amenity, index) => (
+              <div key={index} className="flex items-center gap-4 p-4 bg-oceanic-50 dark:bg-navy-700/50 rounded-xl border border-oceanic-200 dark:border-navy-700">
+                <div className="w-10 h-10 bg-oceanic-100 dark:bg-navy-700 rounded-lg flex items-center justify-center">
+                  <amenity.icon className="w-5 h-5 text-oceanic-600 dark:text-oceanic-300" />
+                </div>
+                <span className="text-black dark:text-oceanic-200 font-semibold text-base">{amenity.label}</span>
+              </div>
+            ))}
+          </div>
 
-        {/* Price Section */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-700/30">
-          <div>
-            {isReturningCustomer ? (
-              <>
-                <p className={`text-sm line-through ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                  KES {property.originalPrice.toLocaleString()}
-                </p>
-                <p className="text-2xl font-bold text-green-400">
-                  KES {property.discountedPrice.toLocaleString()}/night
-                </p>
-                <p className="text-sm text-green-400">Returning Customer Price</p>
-              </>
-            ) : (
-              <>
-                <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  KES {property.originalPrice.toLocaleString()}/night
-                </p>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                  Best available rate
-                </p>
-              </>
+          {/* Property Details with Better Spacing */}
+          <div className="flex items-center justify-between py-6 border-t border-ivory-200 dark:border-navy-700">
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-3">
+                <Bed className="w-7 h-7 text-oceanic-600 dark:text-oceanic-400" />
+                <span className="text-black dark:text-oceanic-200 font-bold text-xl">{property.bedrooms || 1} Bedroom</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Bath className="w-7 h-7 text-oceanic-600 dark:text-oceanic-400" />
+                <span className="text-black dark:text-oceanic-200 font-bold text-xl">{property.bathrooms || 1} Bath</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <MapPin className="w-6 h-6 text-oceanic-600 dark:text-oceanic-400" />
+              <span className="text-black dark:text-oceanic-200 font-medium text-lg">{property.location}</span>
+            </div>
+          </div>
+
+          {/* Pricing Section with Enhanced Spacing */}
+          <div className="bg-gradient-to-r from-blue-50 to-teal-50 dark:from-navy-700 dark:to-navy-600 rounded-2xl p-8 border border-blue-200 dark:border-navy-500">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+                KES {property.price.toLocaleString()}
+              </span>
+              <span className="text-black dark:text-oceanic-200 font-medium text-lg">per night</span>
+            </div>
+            
+            {isReturningCustomer && property.discountedPrice && (
+              <div className="flex items-center gap-3">
+                <span className="text-lg text-gray-500 line-through">
+                  KES {property.originalPrice?.toLocaleString()}
+                </span>
+                <span className="px-3 py-1 bg-green-100 text-green-800 font-bold rounded-full text-sm">
+                  Returning Guest Discount
+                </span>
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-4">
-          <motion.button
-            onClick={() => setShowBooking(!showBooking)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={`flex-1 py-3 px-6 rounded-xl font-medium transition-colors ${
-              isDark 
-                ? 'bg-yellow-400 text-black hover:bg-yellow-300' 
-                : 'bg-yellow-600 text-white hover:bg-yellow-500'
-            }`}
-          >
-            {showBooking ? 'Hide Calendar' : 'Book Now'}
-          </motion.button>
-          
-          <motion.button
-            onClick={() => navigate(`/properties/${property.id}`)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={`flex-1 py-3 px-6 rounded-xl font-medium border-2 transition-colors ${
-              isDark 
-                ? 'border-gray-600 hover:bg-gray-700/50' 
-                : 'border-gray-300 hover:bg-gray-100'
-            }`}
-          >
-            View Details
-          </motion.button>
+          {/* Action Buttons with Enhanced Styling */}
+          <div className="flex gap-6 pt-6 justify-center flex-wrap">
+            <motion.button
+              onClick={() => setShowBookingModal(true)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn btn-medium text-base font-bold px-6 py-3 shadow-lg flex-1 min-w-[140px] bg-blue-700 text-white hover:bg-blue-800 transition-all duration-300"
+            >
+              Book Now
+            </motion.button>
+            
+            <motion.button
+              onClick={() => navigate(`/properties/${property.id}`)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn btn-medium text-base font-bold px-6 py-3 shadow-lg flex-1 min-w-[140px] bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300"
+            >
+              View Details
+            </motion.button>
+          </div>
         </div>
+      </motion.div>
 
-        {/* Booking Calendar */}
-        {showBooking && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="booking-calendar"
-          >
-            <PropertyCalendar property={property} />
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
+      {/* Enhanced Booking Modal */}
+      <BookingModal
+        isOpen={showBookingModal}
+        onClose={() => setShowBookingModal(false)}
+        property={property}
+      />
+    </>
   );
 };
 

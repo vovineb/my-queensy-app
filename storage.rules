@@ -1,0 +1,30 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Properties images - readable by all, writable by authenticated users
+    match /properties/{propertyId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                      (request.auth.token.admin == true || 
+                       request.auth.uid == resource.metadata.uploadedBy);
+    }
+    
+    // User avatars and documents - only accessible by the user
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Documents - accessible by owner and admins
+    match /documents/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && 
+                            (request.auth.uid == userId || 
+                             request.auth.token.admin == true);
+    }
+    
+    // Temporary uploads - accessible by authenticated users for 1 hour
+    match /temp/{allPaths=**} {
+      allow read, write: if request.auth != null && 
+                            request.time < resource.timeCreated + duration.value(1, 'h');
+    }
+  }
+}

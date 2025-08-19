@@ -11,8 +11,8 @@ const LoadingSpinner = ({ size = 'md', message = 'Loading...' }) => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <div className="relative">
-        <div className={`${sizeClasses[size]} border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto`}></div>
-        <div className={`absolute inset-0 ${sizeClasses[size]} border-4 border-transparent border-r-yellow-600 rounded-full animate-ping mx-auto`}></div>
+        <div className={`${sizeClasses[size]} border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto`}></div>
+        <div className={`absolute inset-0 ${sizeClasses[size]} border-4 border-transparent border-r-blue-600 rounded-full animate-ping mx-auto`}></div>
       </div>
       {message && (
         <p className="text-gray-300 font-body text-center">

@@ -1,23 +1,41 @@
-# Queensy - Luxury Real Estate & Property Management
+# Queensy Stays - Property Booking Platform
 
-A modern, responsive real estate website built with React, Vite, and Tailwind CSS. Features include property listings, contact forms, blog functionality, and Firebase integration.
+A modern, full-stack property booking application built with React, Firebase, and Stripe payments.
+
+## ✨ Features
+
+- **🔐 Authentication**: Email/Password, Google, and Anonymous sign-in
+- **🏠 Property Management**: Browse and book vacation rentals
+- **📅 Real-time Booking**: Live availability checking and instant confirmations
+- **💳 Payment Processing**: Secure Stripe integration with multiple payment methods
+- **📧 Email Notifications**: Automated booking confirmations via EmailJS
+- **📱 Responsive Design**: Mobile-first, modern UI with dark/light themes
+- **🔒 Security**: Firebase security rules and authentication middleware
+
+## 🏗️ Architecture
+
+```
+├── 📂 backend/           # Server-side logic
+│   ├── config/          # Firebase Admin SDK
+│   ├── services/        # Booking & Email services
+│   ├── middleware/      # Authentication
+│   └── models/          # Data models
+├── 📂 frontend/src/     # Client-side services
+├── 📂 functions/        # Firebase Cloud Functions
+└── 📂 src/             # React application
+```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
+- Node.js 18+
+- Firebase account
+- Stripe account (for payments)
+- EmailJS account
 
 ### Installation
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd my-queensy-app
 
-# Install dependencies
-npm install
-
-# Start development server
+1. **Clone the repository**
 npm run dev
 ```
 

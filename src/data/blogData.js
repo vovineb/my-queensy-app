@@ -13,78 +13,86 @@ export const blogPosts = [
     ],
     excerpt: "Experience unparalleled luxury and comfort at our exclusive Diani Beach properties.",
     content: `
-      # The Ultimate Luxury Stay in Diani Beach
+      <h1>The Ultimate Luxury Stay in Diani Beach</h1>
 
-      Discover the epitome of luxury living at our exclusive Diani Beach properties, where every detail is crafted to provide an unforgettable experience.
+      <p>Discover the epitome of luxury living at our exclusive Diani Beach properties, where every detail is crafted to provide an unforgettable experience.</p>
 
-      ## A Paradise Found
+      <h2>A Paradise Found</h2>
 
-      Nestled along the pristine shores of Diani Beach, our properties offer a perfect blend of modern luxury and coastal charm. The moment you step into our accommodations, you're greeted by the gentle ocean breeze and the sound of waves lapping against the shore.
+      <p>Nestled along the pristine shores of Diani Beach, our properties offer a perfect blend of modern luxury and coastal charm. The moment you step into our accommodations, you're greeted by the gentle ocean breeze and the sound of waves lapping against the shore.</p>
 
-      ![Luxury Suite](https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop)
-      *Our signature luxury suite overlooking the Indian Ocean*
+      <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop" alt="Luxury Suite" />
+      <p><em>Our signature luxury suite overlooking the Indian Ocean</em></p>
 
-      ## Unmatched Comfort and Style
+      <h2>Unmatched Comfort and Style</h2>
 
-      Each room is thoughtfully designed to maximize both comfort and aesthetics. From the premium Egyptian cotton sheets to the carefully curated local artwork, every element contributes to an atmosphere of sophisticated tranquility.
+      <p>Each room is thoughtfully designed to maximize both comfort and aesthetics. From the premium Egyptian cotton sheets to the carefully curated local artwork, every element contributes to an atmosphere of sophisticated tranquility.</p>
 
-      The spacious living areas open onto private balconies, offering panoramic views of the Indian Ocean. Watch as the sun paints the sky in brilliant hues during sunrise and sunset, creating the perfect backdrop for your vacation memories.
+      <p>The spacious living areas open onto private balconies, offering panoramic views of the Indian Ocean. Watch as the sun paints the sky in brilliant hues during sunrise and sunset, creating the perfect backdrop for your vacation memories.</p>
 
-      ![Master Bedroom](https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop)
-      *Master bedroom featuring premium amenities and ocean views*
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop" alt="Master Bedroom" />
+      <p><em>Master bedroom featuring premium amenities and ocean views</em></p>
 
-      ## World-Class Amenities
+      <h2>World-Class Amenities</h2>
 
-      Our properties boast an array of premium amenities designed to enhance your stay:
+      <p>Our properties boast an array of premium amenities designed to enhance your stay:</p>
 
-      - **Infinity pools** overlooking the ocean
-      - **Private beach access** with exclusive lounging areas
-      - **Fully equipped modern kitchens** with premium appliances
-      - **High-speed WiFi** throughout the property
-      - **24/7 concierge service** for personalized assistance
-      - **In-room spa services** for ultimate relaxation
-      - **Private chef services** available upon request
-      - **Water sports equipment** and guided tours
+      <ul>
+        <li><span style="color: #3b82f6;">Infinity pools</span> overlooking the ocean</li>
+        <li><span style="color: #3b82f6;">Private beach access</span> with exclusive lounging areas</li>
+        <li><span style="color: #3b82f6;">Fully equipped modern kitchens</span> with premium appliances</li>
+        <li><span style="color: #3b82f6;">High-speed WiFi</span> throughout the property</li>
+        <li><span style="color: #3b82f6;">24/7 concierge service</span> for personalized assistance</li>
+        <li><span style="color: #3b82f6;">In-room spa services</span> for ultimate relaxation</li>
+        <li><span style="color: #3b82f6;">Private chef services</span> available upon request</li>
+        <li><span style="color: #3b82f6;">Water sports equipment</span> and guided tours</li>
+      </ul>
 
-      ## Culinary Excellence
+      <h2>Culinary Excellence</h2>
 
-      Experience the finest dining options right at your doorstep. Our properties feature gourmet kitchens where you can prepare your own meals or enjoy the services of our private chefs who specialize in both local and international cuisine.
+      <p>Experience the finest dining options right at your doorstep. Our properties feature gourmet kitchens where you can prepare your own meals or enjoy the services of our private chefs who specialize in both local and international cuisine.</p>
 
-      ![Ocean View](https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop)
-      *Breathtaking views from our oceanfront terrace*
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop" alt="Ocean View" />
+      <p><em>Breathtaking views from our oceanfront terrace</em></p>
 
-      ## Location and Accessibility
+      <h2>Location and Accessibility</h2>
 
-      Situated in the heart of Diani Beach, our properties offer easy access to:
+      <p>Situated in the heart of Diani Beach, our properties offer easy access to:</p>
 
-      - **International airports** with convenient transfer services
-      - **Local markets and shopping** for authentic Kenyan experiences
-      - **Water sports activities** including diving and snorkeling
-      - **Historical sites** and cultural landmarks
-      - **Nature reserves** for wildlife encounters
-      - **Golf courses** for sports enthusiasts
+      <ul>
+        <li><span style="color: #3b82f6;">International airports</span> with convenient transfer services</li>
+        <li><span style="color: #3b82f6;">Local markets and shopping</span> for authentic Kenyan experiences</li>
+        <li><span style="color: #3b82f6;">Water sports activities</span> including diving and snorkeling</li>
+        <li><span style="color: #3b82f6;">Historical sites</span> and cultural landmarks</li>
+        <li><span style="color: #3b82f6;">Nature reserves</span> for wildlife encounters</li>
+        <li><span style="color: #3b82f6;">Golf courses</span> for sports enthusiasts</li>
+      </ul>
 
-      ## Sustainable Luxury
+      <h2>Sustainable Luxury</h2>
 
-      We believe in responsible luxury. Our properties incorporate sustainable practices while maintaining the highest standards of comfort:
+      <p>We believe in responsible luxury. Our properties incorporate sustainable practices while maintaining the highest standards of comfort:</p>
 
-      - **Solar power systems** for energy efficiency
-      - **Water conservation measures** to protect local resources
-      - **Local sourcing** of materials and products
-      - **Community engagement programs** to support local development
-      - **Wildlife conservation support** through partnerships
+      <ul>
+        <li><span style="color: #3b82f6;">Solar power systems</span> for energy efficiency</li>
+        <li><span style="color: #3b82f6;">Water conservation measures</span> to protect local resources</li>
+        <li><span style="color: #3b82f6;">Local sourcing</span> of materials and products</li>
+        <li><span style="color: #3b82f6;">Community engagement programs</span> to support local development</li>
+        <li><span style="color: #3b82f6;">Wildlife conservation support</span> through partnerships</li>
+      </ul>
 
-      ## Book Your Stay
+      <h2>Book Your Stay</h2>
 
-      Experience the ultimate in luxury living at Diani Beach. Contact us to learn more about our properties and to book your stay in paradise.
+      <p>Experience the ultimate in luxury living at Diani Beach. Contact us to learn more about our properties and to book your stay in paradise.</p>
 
-      ### Why Choose Queensy?
+      <h3>Why Choose Queensy?</h3>
 
-      - **Exclusive locations** with prime beachfront access
-      - **Personalized service** tailored to your preferences
-      - **Competitive pricing** with transparent fee structure
-      - **24/7 support** throughout your entire stay
-      - **Flexible booking options** to suit your schedule
+      <ul>
+        <li><span style="color: #3b82f6;">Exclusive locations</span> with prime beachfront access</li>
+        <li><span style="color: #3b82f6;">Personalized service</span> tailored to your preferences</li>
+        <li><span style="color: #3b82f6;">Competitive pricing</span> with transparent fee structure</li>
+        <li><span style="color: #3b82f6;">24/7 support</span> throughout your entire stay</li>
+        <li><span style="color: #3b82f6;">Flexible booking options</span> to suit your schedule</li>
+      </ul>
     `
   },
   {
@@ -101,151 +109,177 @@ export const blogPosts = [
     ],
     excerpt: "From water sports to cultural experiences, discover the best activities Diani has to offer.",
     content: `
-      # Top 10 Must-Do Activities in Diani
+      <h1>Top 10 Must-Do Activities in Diani</h1>
 
-      Diani Beach isn't just about lounging on pristine white sands - it's a hub of exciting activities and adventures waiting to be discovered.
+      <p>Diani Beach isn't just about lounging on pristine white sands - it's a hub of exciting activities and adventures waiting to be discovered.</p>
 
-      ## 1. Water Sports Paradise
+      <h2>1. Water Sports Paradise</h2>
 
-      Diani's crystal-clear waters provide the perfect playground for water sports enthusiasts. Whether you're a beginner or an expert, there's something for everyone:
+      <p>Diani's crystal-clear waters provide the perfect playground for water sports enthusiasts. Whether you're a beginner or an expert, there's something for everyone:</p>
 
-      ![Water Sports](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop)
-      *Experience the thrill of water sports in Diani's pristine waters*
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Water Sports" />
+      <p><em>Experience the thrill of water sports in Diani's pristine waters</em></p>
 
-      ### Popular Water Activities:
-      - **Kitesurfing** - Take advantage of the consistent trade winds
-      - **Snorkeling** - Explore vibrant coral reefs teeming with marine life
-      - **Scuba diving** - Discover underwater wonders with certified instructors
-      - **Jet skiing** - Feel the adrenaline rush on the open water
-      - **Parasailing** - Soar above the ocean for breathtaking views
-      - **Deep-sea fishing** - Catch big game fish with experienced guides
+      <h3>Popular Water Activities:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Kitesurfing</span> - Take advantage of the consistent trade winds</li>
+        <li><span style="color: #3b82f6;">Snorkeling</span> - Explore vibrant coral reefs teeming with marine life</li>
+        <li><span style="color: #3b82f6;">Scuba diving</span> - Discover underwater wonders with certified instructors</li>
+        <li><span style="color: #3b82f6;">Jet skiing</span> - Feel the adrenaline rush on the open water</li>
+        <li><span style="color: #3b82f6;">Parasailing</span> - Soar above the ocean for breathtaking views</li>
+        <li><span style="color: #3b82f6;">Deep-sea fishing</span> - Catch big game fish with experienced guides</li>
+      </ul>
 
-      ## 2. Cultural Village Tours
+      <h2>2. Cultural Village Tours</h2>
 
-      Immerse yourself in the rich cultural heritage of the Kenyan coast:
+      <p>Immerse yourself in the rich cultural heritage of the Kenyan coast:</p>
 
-      ![Cultural Experience](https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop)
-      *Discover the vibrant culture of the Kenyan coast*
+      <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop" alt="Cultural Experience" />
+      <p><em>Discover the vibrant culture of the Kenyan coast</em></p>
 
-      ### Cultural Highlights:
-      - **Traditional dance performances** by local artists
-      - **Swahili cooking classes** to learn authentic recipes
-      - **Local market visits** for traditional crafts and souvenirs
-      - **Historical site tours** including ancient ruins and mosques
-      - **Community projects** to support local development
+      <h3>Cultural Highlights:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Traditional dance performances</span> by local artists</li>
+        <li><span style="color: #3b82f6;">Swahili cooking classes</span> to learn authentic recipes</li>
+        <li><span style="color: #3b82f6;">Local market visits</span> for traditional crafts and souvenirs</li>
+        <li><span style="color: #3b82f6;">Historical site tours</span> including ancient ruins and mosques</li>
+        <li><span style="color: #3b82f6;">Community projects</span> to support local development</li>
+      </ul>
 
-      ## 3. Wildlife Safari Adventures
+      <h2>3. Wildlife Safari Adventures</h2>
 
-      Experience Kenya's famous wildlife just a short distance from Diani:
+      <p>Experience Kenya's famous wildlife just a short distance from Diani:</p>
 
-      ### Safari Options:
-      - **Shimba Hills National Reserve** - Home to elephants, leopards, and rare sable antelope
-      - **Tsavo East National Park** - One of Kenya's largest wildlife sanctuaries
-      - **Mwaluganje Elephant Sanctuary** - Conservation-focused elephant viewing
-      - **Colobus Conservation** - Primate sanctuary and rehabilitation center
+      <h3>Safari Options:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Shimba Hills National Reserve</span> - Home to elephants, leopards, and rare sable antelope</li>
+        <li><span style="color: #3b82f6;">Tsavo East National Park</span> - One of Kenya's largest wildlife sanctuaries</li>
+        <li><span style="color: #3b82f6;">Mwaluganje Elephant Sanctuary</span> - Conservation-focused elephant viewing</li>
+        <li><span style="color: #3b82f6;">Colobus Conservation</span> - Primate sanctuary and rehabilitation center</li>
+      </ul>
 
-      ## 4. Beach Yoga and Wellness
+      <h2>4. Beach Yoga and Wellness</h2>
 
-      Start your day with sunrise yoga on the beach:
+      <p>Start your day with sunrise yoga on the beach:</p>
 
-      ![Beach Yoga](https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop)
-      *Find inner peace with beachfront yoga sessions*
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop" alt="Beach Yoga" />
+      <p><em>Find inner peace with beachfront yoga sessions</em></p>
 
-      ### Wellness Activities:
-      - **Sunrise yoga sessions** with certified instructors
-      - **Meditation classes** in serene beach settings
-      - **Spa treatments** using local natural products
-      - **Massage therapy** with ocean views
-      - **Wellness retreats** for complete rejuvenation
+      <h3>Wellness Activities:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Sunrise yoga sessions</span> with certified instructors</li>
+        <li><span style="color: #3b82f6;">Meditation classes</span> in serene beach settings</li>
+        <li><span style="color: #3b82f6;">Spa treatments</span> using local natural products</li>
+        <li><span style="color: #3b82f6;">Massage therapy</span> with ocean views</li>
+        <li><span style="color: #3b82f6;">Wellness retreats</span> for complete rejuvenation</li>
+      </ul>
 
-      ## 5. Sunset Dhow Cruises
+      <h2>5. Sunset Dhow Cruises</h2>
 
-      Experience the magic of a traditional dhow cruise:
+      <p>Experience the magic of a traditional dhow cruise:</p>
 
-      ### Cruise Features:
-      - **Traditional wooden dhows** with modern amenities
-      - **Sunset viewing** with complimentary drinks
-      - **Dolphin watching** in their natural habitat
-      - **Romantic dinner cruises** for couples
-      - **Snorkeling stops** at pristine coral reefs
+      <h3>Cruise Features:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Traditional wooden dhows</span> with modern amenities</li>
+        <li><span style="color: #3b82f6;">Sunset viewing</span> with complimentary drinks</li>
+        <li><span style="color: #3b82f6;">Dolphin watching</span> in their natural habitat</li>
+        <li><span style="color: #3b82f6;">Romantic dinner cruises</span> for couples</li>
+        <li><span style="color: #3b82f6;">Snorkeling stops</span> at pristine coral reefs</li>
+      </ul>
 
-      ## 6. Golf at Leisure Lodge
+      <h2>6. Golf at Leisure Lodge</h2>
 
-      Perfect your swing at one of Kenya's premier golf courses:
+      <p>Perfect your swing at one of Kenya's premier golf courses:</p>
 
-      ### Golf Experience:
-      - **18-hole championship course** with ocean views
-      - **Professional instruction** for all skill levels
-      - **Club rental** and equipment available
-      - **Tournament participation** for competitive players
-      - **Clubhouse dining** with panoramic views
+      <h3>Golf Experience:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">18-hole championship course</span> with ocean views</li>
+        <li><span style="color: #3b82f6;">Professional instruction</span> for all skill levels</li>
+        <li><span style="color: #3b82f6;">Club rental</span> and equipment available</li>
+        <li><span style="color: #3b82f6;">Tournament participation</span> for competitive players</li>
+        <li><span style="color: #3b82f6;">Clubhouse dining</span> with panoramic views</li>
+      </ul>
 
-      ## 7. Marine Conservation Activities
+      <h2>7. Marine Conservation Activities</h2>
 
-      Contribute to ocean conservation while having fun:
+      <p>Contribute to ocean conservation while having fun:</p>
 
-      ### Conservation Activities:
-      - **Coral reef restoration** projects
-      - **Marine life monitoring** with researchers
-      - **Beach clean-up** initiatives
-      - **Turtle conservation** programs
-      - **Educational workshops** on marine ecosystems
+      <h3>Conservation Activities:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Coral reef restoration</span> projects</li>
+        <li><span style="color: #3b82f6;">Marine life monitoring</span> with researchers</li>
+        <li><span style="color: #3b82f6;">Beach clean-up</span> initiatives</li>
+        <li><span style="color: #3b82f6;">Turtle conservation</span> programs</li>
+        <li><span style="color: #3b82f6;">Educational workshops</span> on marine ecosystems</li>
+      </ul>
 
-      ## 8. Adventure Sports
+      <h2>8. Adventure Sports</h2>
 
-      Get your adrenaline fix with exciting adventure sports:
+      <p>Get your adrenaline fix with exciting adventure sports:</p>
 
-      ### Adventure Options:
-      - **Zip-lining** through coastal forests
-      - **Rock climbing** on natural formations
-      - **Mountain biking** on scenic trails
-      - **Horseback riding** along the beach
-      - **Quad biking** through diverse terrain
+      <h3>Adventure Options:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Zip-lining</span> through coastal forests</li>
+        <li><span style="color: #3b82f6;">Rock climbing</span> on natural formations</li>
+        <li><span style="color: #3b82f6;">Mountain biking</span> on scenic trails</li>
+        <li><span style="color: #3b82f6;">Horseback riding</span> along the beach</li>
+        <li><span style="color: #3b82f6;">Quad biking</span> through diverse terrain</li>
+      </ul>
 
-      ## 9. Local Cuisine Tours
+      <h2>9. Local Cuisine Tours</h2>
 
-      Taste the authentic flavors of the Kenyan coast:
+      <p>Taste the authentic flavors of the Kenyan coast:</p>
 
-      ### Culinary Experiences:
-      - **Swahili cooking classes** with local chefs
-      - **Seafood market tours** to learn about local catches
-      - **Spice plantation visits** to understand local ingredients
-      - **Wine tasting** with international selections
-      - **Street food tours** for authentic local flavors
+      <h3>Culinary Experiences:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Swahili cooking classes</span> with local chefs</li>
+        <li><span style="color: #3b82f6;">Seafood market tours</span> to learn about local catches</li>
+        <li><span style="color: #3b82f6;">Spice plantation visits</span> to understand local ingredients</li>
+        <li><span style="color: #3b82f6;">Wine tasting</span> with international selections</li>
+        <li><span style="color: #3b82f6;">Street food tours</span> for authentic local flavors</li>
+      </ul>
 
-      ## 10. Photography and Art Workshops
+      <h2>10. Photography and Art Workshops</h2>
 
-      Capture the beauty of Diani through creative workshops:
+      <p>Capture the beauty of Diani through creative workshops:</p>
 
-      ### Creative Activities:
-      - **Photography tours** with professional guidance
-      - **Art workshops** inspired by local culture
-      - **Souvenir making** with traditional techniques
-      - **Digital content creation** for social media
-      - **Cultural storytelling** sessions
+      <h3>Creative Activities:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Photography tours</span> with professional guidance</li>
+        <li><span style="color: #3b82f6;">Art workshops</span> inspired by local culture</li>
+        <li><span style="color: #3b82f6;">Souvenir making</span> with traditional techniques</li>
+        <li><span style="color: #3b82f6;">Digital content creation</span> for social media</li>
+        <li><span style="color: #3b82f6;">Cultural storytelling</span> sessions</li>
+      </ul>
 
-      ## Planning Your Activities
+      <h2>Planning Your Activities</h2>
 
-      ### Best Time to Visit:
-      - **June to October**: Dry season with perfect weather
-      - **December to March**: Peak season with vibrant atmosphere
-      - **April to May**: Green season with fewer crowds
+      <h3>Best Time to Visit:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">June to October</span>: Dry season with perfect weather</li>
+        <li><span style="color: #3b82f6;">December to March</span>: Peak season with vibrant atmosphere</li>
+        <li><span style="color: #3b82f6;">April to May</span>: Green season with fewer crowds</li>
+      </ul>
 
-      ### Booking Tips:
-      - **Advance reservations** recommended for popular activities
-      - **Package deals** available for multiple activities
-      - **Local guides** provide authentic experiences
-      - **Safety first** - always choose licensed operators
-      - **Flexible scheduling** to accommodate weather conditions
+      <h3>Booking Tips:</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Advance reservations</span> recommended for popular activities</li>
+        <li><span style="color: #3b82f6;">Package deals</span> available for multiple activities</li>
+        <li><span style="color: #3b82f6;">Local guides</span> provide authentic experiences</li>
+        <li><span style="color: #3b82f6;">Safety first</span> - always choose licensed operators</li>
+        <li><span style="color: #3b82f6;">Flexible scheduling</span> to accommodate weather conditions</li>
+      </ul>
 
-      ## Why Choose Queensy for Activities?
+      <h2>Why Choose Queensy for Activities?</h2>
 
-      - **Curated experiences** selected for quality and authenticity
-      - **Local partnerships** ensuring genuine cultural immersion
-      - **Safety standards** with certified operators only
-      - **Flexible booking** with easy cancellation policies
-      - **Personalized recommendations** based on your interests
-      - **Competitive pricing** with transparent fee structures
+      <ul>
+        <li><span style="color: #3b82f6;">Curated experiences</span> selected for quality and authenticity</li>
+        <li><span style="color: #3b82f6;">Local partnerships</span> ensuring genuine cultural immersion</li>
+        <li><span style="color: #3b82f6;">Safety standards</span> with certified operators only</li>
+        <li><span style="color: #3b82f6;">Flexible booking</span> with easy cancellation policies</li>
+        <li><span style="color: #3b82f6;">Personalized recommendations</span> based on your interests</li>
+        <li><span style="color: #3b82f6;">Competitive pricing</span> with transparent fee structures</li>
+      </ul>
     `
   },
   {
@@ -262,152 +296,182 @@ export const blogPosts = [
     ],
     excerpt: "Learn about our commitment to sustainable tourism and environmental conservation in Diani Beach.",
     content: `
-      # Sustainable Tourism in Diani: Our Commitment
+      <h1>Sustainable Tourism in Diani: Our Commitment</h1>
 
-      At Queensy, we believe that luxury and sustainability can coexist. Our commitment to sustainable tourism goes beyond providing exceptional accommodations - we're dedicated to preserving the natural beauty and cultural heritage of Diani Beach for future generations.
+      <p>At Queensy, we believe that luxury and sustainability can coexist. Our commitment to sustainable tourism goes beyond providing exceptional accommodations - we're dedicated to preserving the natural beauty and cultural heritage of Diani Beach for future generations.</p>
 
-      ## Our Environmental Initiatives
+      <h2>Our Environmental Initiatives</h2>
 
-      ![Sustainable Tourism](https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop)
-      *Preserving the natural beauty of Diani Beach through sustainable practices*
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" alt="Sustainable Tourism" />
+      <p><em>Preserving the natural beauty of Diani Beach through sustainable practices</em></p>
 
-      ### Energy Conservation
-      - **Solar power systems** installed across all properties
-      - **Energy-efficient appliances** and LED lighting throughout
-      - **Smart climate control** systems to minimize energy waste
-      - **Renewable energy partnerships** with local providers
-      - **Carbon footprint monitoring** and reduction programs
+      <h3>Energy Conservation</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Solar power systems</span> installed across all properties</li>
+        <li><span style="color: #3b82f6;">Energy-efficient appliances</span> and LED lighting throughout</li>
+        <li><span style="color: #3b82f6;">Smart climate control</span> systems to minimize energy waste</li>
+        <li><span style="color: #3b82f6;">Renewable energy partnerships</span> with local providers</li>
+        <li><span style="color: #3b82f6;">Carbon footprint monitoring</span> and reduction programs</li>
+      </ul>
 
-      ### Water Management
-      - **Rainwater harvesting** systems for landscape irrigation
-      - **Water-efficient fixtures** and low-flow appliances
-      - **Greywater recycling** for non-potable uses
-      - **Local water conservation** education programs
-      - **Beach clean-up initiatives** to protect marine ecosystems
+      <h3>Water Management</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Rainwater harvesting</span> systems for landscape irrigation</li>
+        <li><span style="color: #3b82f6;">Water-efficient fixtures</span> and low-flow appliances</li>
+        <li><span style="color: #3b82f6;">Greywater recycling</span> for non-potable uses</li>
+        <li><span style="color: #3b82f6;">Local water conservation</span> education programs</li>
+        <li><span style="color: #3b82f6;">Beach clean-up initiatives</span> to protect marine ecosystems</li>
+      </ul>
 
-      ## Community Engagement
+      <h2>Community Engagement</h2>
 
-      We believe in giving back to the communities that make Diani Beach special:
+      <p>We believe in giving back to the communities that make Diani Beach special:</p>
 
-      ![Community](https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop)
-      *Supporting local communities through sustainable tourism*
+      <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop" alt="Community" />
+      <p><em>Supporting local communities through sustainable tourism</em></p>
 
-      ### Local Partnerships
-      - **Employment opportunities** prioritizing local residents
-      - **Skills development programs** for community members
-      - **Local business support** through supplier partnerships
-      - **Cultural preservation** initiatives and workshops
-      - **Educational programs** for sustainable tourism practices
+      <h3>Local Partnerships</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Employment opportunities</span> prioritizing local residents</li>
+        <li><span style="color: #3b82f6;">Skills development programs</span> for community members</li>
+        <li><span style="color: #3b82f6;">Local business support</span> through supplier partnerships</li>
+        <li><span style="color: #3b82f6;">Cultural preservation</span> initiatives and workshops</li>
+        <li><span style="color: #3b82f6;">Educational programs</span> for sustainable tourism practices</li>
+      </ul>
 
-      ### Economic Impact
-      - **Fair wages** and working conditions for all staff
-      - **Local sourcing** of products and services
-      - **Revenue sharing** with community projects
-      - **Tourism education** for sustainable development
-      - **Market access** for local artisans and craftspeople
+      <h3>Economic Impact</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Fair wages</span> and working conditions for all staff</li>
+        <li><span style="color: #3b82f6;">Local sourcing</span> of products and services</li>
+        <li><span style="color: #3b82f6;">Revenue sharing</span> with community projects</li>
+        <li><span style="color: #3b82f6;">Tourism education</span> for sustainable development</li>
+        <li><span style="color: #3b82f6;">Market access</span> for local artisans and craftspeople</li>
+      </ul>
 
-      ## Wildlife Conservation
+      <h2>Wildlife Conservation</h2>
 
-      Our commitment extends to protecting the diverse wildlife of the region:
+      <p>Our commitment extends to protecting the diverse wildlife of the region:</p>
 
-      ### Marine Conservation
-      - **Coral reef protection** programs and monitoring
-      - **Marine life education** for guests and staff
-      - **Sustainable fishing** practices and partnerships
-      - **Plastic reduction** initiatives and beach clean-ups
-      - **Marine sanctuary** support and advocacy
+      <h3>Marine Conservation</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Coral reef protection</span> programs and monitoring</li>
+        <li><span style="color: #3b82f6;">Marine life education</span> for guests and staff</li>
+        <li><span style="color: #3b82f6;">Sustainable fishing</span> practices and partnerships</li>
+        <li><span style="color: #3b82f6;">Plastic reduction</span> initiatives and beach clean-ups</li>
+        <li><span style="color: #3b82f6;">Marine sanctuary</span> support and advocacy</li>
+      </ul>
 
-      ### Terrestrial Wildlife
-      - **Elephant conservation** through sanctuary partnerships
-      - **Primate protection** programs and rehabilitation
-      - **Bird watching** tours promoting conservation awareness
-      - **Habitat preservation** through land management
-      - **Wildlife corridor** protection and maintenance
+      <h3>Terrestrial Wildlife</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Elephant conservation</span> through sanctuary partnerships</li>
+        <li><span style="color: #3b82f6;">Primate protection</span> programs and rehabilitation</li>
+        <li><span style="color: #3b82f6;">Bird watching</span> tours promoting conservation awareness</li>
+        <li><span style="color: #3b82f6;">Habitat preservation</span> through land management</li>
+        <li><span style="color: #3b82f6;">Wildlife corridor</span> protection and maintenance</li>
+      </ul>
 
-      ## Sustainable Accommodation Practices
+      <h2>Sustainable Accommodation Practices</h2>
 
-      ![Eco-Friendly](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop)
-      *Eco-friendly accommodations that don't compromise on luxury*
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Eco-Friendly" />
+      <p><em>Eco-friendly accommodations that don't compromise on luxury</em></p>
 
-      ### Green Building Standards
-      - **Local materials** sourced for construction and renovation
-      - **Natural ventilation** systems to reduce energy consumption
-      - **Eco-friendly cleaning** products and practices
-      - **Waste reduction** and recycling programs
-      - **Biodegradable amenities** and packaging
+      <h3>Green Building Standards</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Local materials</span> sourced for construction and renovation</li>
+        <li><span style="color: #3b82f6;">Natural ventilation</span> systems to reduce energy consumption</li>
+        <li><span style="color: #3b82f6;">Eco-friendly cleaning</span> products and practices</li>
+        <li><span style="color: #3b82f6;">Waste reduction</span> and recycling programs</li>
+        <li><span style="color: #3b82f6;">Biodegradable amenities</span> and packaging</li>
+      </ul>
 
-      ### Guest Education
-      - **Sustainability workshops** and educational materials
-      - **Local culture** immersion programs
-      - **Conservation volunteer** opportunities
-      - **Responsible tourism** guidelines for guests
-      - **Environmental impact** awareness campaigns
+      <h3>Guest Education</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Sustainability workshops</span> and educational materials</li>
+        <li><span style="color: #3b82f6;">Local culture</span> immersion programs</li>
+        <li><span style="color: #3b82f6;">Conservation volunteer</span> opportunities</li>
+        <li><span style="color: #3b82f6;">Responsible tourism</span> guidelines for guests</li>
+        <li><span style="color: #3b82f6;">Environmental impact</span> awareness campaigns</li>
+      </ul>
 
-      ## Our Sustainability Goals
+      <h2>Our Sustainability Goals</h2>
 
-      ### Short-term Objectives (2024-2025)
-      - **100% renewable energy** usage across all properties
-      - **Zero plastic waste** in all operations
-      - **50% local employment** in all positions
-      - **Carbon neutral** operations certification
-      - **100% organic** cleaning and maintenance products
+      <h3>Short-term Objectives (2024-2025)</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">100% renewable energy</span> usage across all properties</li>
+        <li><span style="color: #3b82f6;">Zero plastic waste</span> in all operations</li>
+        <li><span style="color: #3b82f6;">50% local employment</span> in all positions</li>
+        <li><span style="color: #3b82f6;">Carbon neutral</span> operations certification</li>
+        <li><span style="color: #3b82f6;">100% organic</span> cleaning and maintenance products</li>
+      </ul>
 
-      ### Long-term Vision (2025-2030)
-      - **Net positive** environmental impact
-      - **Community-owned** tourism initiatives
-      - **Wildlife sanctuary** establishment and management
-      - **Educational center** for sustainable tourism
-      - **Regional model** for eco-tourism development
+      <h3>Long-term Vision (2025-2030)</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Net positive</span> environmental impact</li>
+        <li><span style="color: #3b82f6;">Community-owned</span> tourism initiatives</li>
+        <li><span style="color: #3b82f6;">Wildlife sanctuary</span> establishment and management</li>
+        <li><span style="color: #3b82f6;">Educational center</span> for sustainable tourism</li>
+        <li><span style="color: #3b82f6;">Regional model</span> for eco-tourism development</li>
+      </ul>
 
-      ## How Guests Can Contribute
+      <h2>How Guests Can Contribute</h2>
 
-      ### During Your Stay
-      - **Conserve water** by taking shorter showers
-      - **Reduce energy** by turning off lights and AC when not in use
-      - **Support local** by purchasing from local vendors
-      - **Respect wildlife** by maintaining safe distances
-      - **Participate** in conservation activities and workshops
+      <h3>During Your Stay</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Conserve water</span> by taking shorter showers</li>
+        <li><span style="color: #3b82f6;">Reduce energy</span> by turning off lights and AC when not in use</li>
+        <li><span style="color: #3b82f6;">Support local</span> by purchasing from local vendors</li>
+        <li><span style="color: #3b82f6;">Respect wildlife</span> by maintaining safe distances</li>
+        <li><span style="color: #3b82f6;">Participate</span> in conservation activities and workshops</li>
+      </ul>
 
-      ### Before and After
-      - **Choose sustainable** transportation options
-      - **Offset carbon** emissions from travel
-      - **Learn about** local culture and customs
-      - **Share experiences** to promote responsible tourism
-      - **Support conservation** organizations and initiatives
+      <h3>Before and After</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Choose sustainable</span> transportation options</li>
+        <li><span style="color: #3b82f6;">Offset carbon</span> emissions from travel</li>
+        <li><span style="color: #3b82f6;">Learn about</span> local culture and customs</li>
+        <li><span style="color: #3b82f6;">Share experiences</span> to promote responsible tourism</li>
+        <li><span style="color: #3b82f6;">Support conservation</span> organizations and initiatives</li>
+      </ul>
 
-      ## Certifications and Partnerships
+      <h2>Certifications and Partnerships</h2>
 
-      We're proud to work with leading sustainability organizations:
+      <p>We're proud to work with leading sustainability organizations:</p>
 
-      ### Current Partnerships
-      - **Green Tourism** certification and standards
-      - **Marine Conservation** Society partnership
-      - **Local Community** Development Foundation
-      - **Wildlife Conservation** Network membership
-      - **Sustainable Tourism** Alliance participation
+      <h3>Current Partnerships</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Green Tourism</span> certification and standards</li>
+        <li><span style="color: #3b82f6;">Marine Conservation</span> Society partnership</li>
+        <li><span style="color: #3b82f6;">Local Community</span> Development Foundation</li>
+        <li><span style="color: #3b82f6;">Wildlife Conservation</span> Network membership</li>
+        <li><span style="color: #3b82f6;">Sustainable Tourism</span> Alliance participation</li>
+      </ul>
 
-      ### Ongoing Commitments
-      - **Regular audits** of environmental impact
-      - **Continuous improvement** of sustainability practices
-      - **Transparent reporting** of progress and challenges
-      - **Stakeholder engagement** in decision-making
-      - **Innovation** in sustainable tourism solutions
+      <h3>Ongoing Commitments</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Regular audits</span> of environmental impact</li>
+        <li><span style="color: #3b82f6;">Continuous improvement</span> of sustainability practices</li>
+        <li><span style="color: #3b82f6;">Transparent reporting</span> of progress and challenges</li>
+        <li><span style="color: #3b82f6;">Stakeholder engagement</span> in decision-making</li>
+        <li><span style="color: #3b82f6;">Innovation</span> in sustainable tourism solutions</li>
+      </ul>
 
-      ## Join Our Mission
+      <h2>Join Our Mission</h2>
 
-      When you choose Queensy, you're not just booking a luxury stay - you're supporting sustainable tourism that benefits the environment, local communities, and future generations.
+      <p>When you choose Queensy, you're not just booking a luxury stay - you're supporting sustainable tourism that benefits the environment, local communities, and future generations.</p>
 
-      ### Book Your Sustainable Stay
-      Experience luxury that doesn't compromise on environmental responsibility. Contact us to learn more about our sustainable practices and book your eco-friendly vacation in Diani Beach.
+      <h3>Book Your Sustainable Stay</h3>
+      <p>Experience luxury that doesn't compromise on environmental responsibility. Contact us to learn more about our sustainable practices and book your eco-friendly vacation in Diani Beach.</p>
 
-      ### Get Involved
-      - **Volunteer** with our conservation programs
-      - **Donate** to local community projects
-      - **Participate** in educational workshops
-      - **Share** your sustainable tourism experiences
-      - **Advocate** for responsible tourism practices
+      <h3>Get Involved</h3>
+      <ul>
+        <li><span style="color: #3b82f6;">Volunteer</span> with our conservation programs</li>
+        <li><span style="color: #3b82f6;">Donate</span> to local community projects</li>
+        <li><span style="color: #3b82f6;">Participate</span> in educational workshops</li>
+        <li><span style="color: #3b82f6;">Share</span> your sustainable tourism experiences</li>
+        <li><span style="color: #3b82f6;">Advocate</span> for responsible tourism practices</li>
+      </ul>
 
-      Together, we can create a more sustainable future for Diani Beach and beyond.
+      <p>Together, we can create a more sustainable future for Diani Beach and beyond.</p>
     `
   }
 ];

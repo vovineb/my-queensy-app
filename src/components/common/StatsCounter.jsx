@@ -51,7 +51,7 @@ const StatsCounter = ({ endValue, duration = 2000, icon: Icon, label, suffix = '
       className="text-center"
     >
       <div className="flex items-center justify-center mb-4">
-        <Icon className="w-8 h-8 text-yellow-400 mr-3" />
+        <Icon className="w-8 h-8 text-blue-400 mr-3" />
         <span className="text-4xl font-bold text-white">
           {count.toLocaleString()}{suffix}
         </span>
@@ -95,7 +95,7 @@ const StatsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-playfair text-yellow-400 mb-4">
+          <h2 className="text-4xl font-playfair text-blue-400 mb-4">
             Queensy by the Numbers
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">

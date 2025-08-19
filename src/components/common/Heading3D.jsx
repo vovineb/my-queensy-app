@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Heading3D = ({ children, className = '', level = 1, color = 'yellow' }) => {
+const Heading3D = ({ children, className = '', level = 1, color = 'blue' }) => {
   const Tag = `h${level}`;
   const baseClasses = 'font-playfair font-bold relative';
   const colorClasses = {
-    yellow: 'text-yellow-400',
+    blue: 'text-blue-500',
     white: 'text-white',
     gray: 'text-gray-800'
   };

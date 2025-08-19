@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Custom TikTok icon component
 const TikTokIcon = (props) => (
@@ -9,58 +10,71 @@ const TikTokIcon = (props) => (
   </svg>
 );
 
-const Footer = ({ watermarkText = "QUEENSY DIANI BnBs" }) => {
-  return (
-    <footer className="relative bg-black text-yellow-100 py-16 mt-24 overflow-hidden">
-      {/* Large watermark text */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-        <motion.span 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.05, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="text-[20vw] font-bold text-yellow-400 whitespace-nowrap tracking-wider font-playfair"
-        >
-          QUEENSY BNB
-        </motion.span>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.03, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <span className="text-[15vw] font-bold text-yellow-400 whitespace-nowrap tracking-widest font-playfair rotate-[-10deg]">
-            QUEENSY BNB
-          </span>
-        </motion.div>
-      </div>
+const Footer = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
-      <div className="relative z-10 container mx-auto px-4">
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Show footer when near bottom of page or scrolling up
+      const nearBottom = currentScrollY + windowHeight >= documentHeight - 200;
+      const scrollingUp = currentScrollY < scrollY;
+      
+      setIsVisible(nearBottom || scrollingUp);
+      setScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrollY]);
+
+  return (
+    <motion.footer 
+      className="relative bg-navy-900 text-ivory-500 py-16 mt-24"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ 
+        y: isVisible ? 0 : 100, 
+        opacity: isVisible ? 1 : 0 
+      }}
+      transition={{ 
+        duration: 0.6, 
+        ease: "easeInOut" 
+      }}
+    >
+      <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div>
-            <h3 className="text-xl font-bold text-yellow-400 mb-6 font-playfair">Queensy</h3>
-            <div className="space-y-4 text-yellow-200">
-              <p className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 flex-shrink-0" />
-                <span>Diani Beach Road, Diani, Mombasa, Kenya</span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Phone className="w-5 h-5 flex-shrink-0" />
-                <span>+254706880575</span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Mail className="w-5 h-5 flex-shrink-0" />
-                <span>info@queensy.com</span>
-              </p>
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Queensy</h3>
+            <p className="text-blue-200 mb-4 max-w-md">
+              Your premier destination for luxury accommodations in the heart of Diani Beach. Experience the perfect blend of comfort, style, and authentic Kenyan hospitality.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-oceanic-400" />
+                <span className="text-white">Diani Beach, Kenya</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-oceanic-400" />
+                <span className="text-white">+254 707 335 604</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-oceanic-400" />
+                <span className="text-white">info@queensy.com</span>
+              </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold text-yellow-400 mb-6">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-blue-300 mb-6">Quick Links</h4>
             <div className="grid gap-4">
               {[
-                { to: '/home', label: 'Home' },
+                { to: '/', label: 'Home' },
                 { to: '/properties', label: 'Properties' },
                 { to: '/blog', label: 'Blog' },
                 { to: '/about', label: 'About Us' },
@@ -69,7 +83,7 @@ const Footer = ({ watermarkText = "QUEENSY DIANI BnBs" }) => {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                  className="text-white hover:text-blue-300 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -77,10 +91,32 @@ const Footer = ({ watermarkText = "QUEENSY DIANI BnBs" }) => {
             </div>
           </div>
 
+          {/* Services */}
+          <div>
+            <h4 className="text-lg font-semibold text-blue-300 mb-6">Our Services</h4>
+            <div className="grid gap-4">
+              {[
+                'Web Development',
+                'Auditing',
+                'Financial Bookkeeping',
+                'QuickBooks',
+                '3D Rendering',
+                'AutoCAD'
+              ].map((service) => (
+                <span
+                  key={service}
+                  className="text-white"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+
           {/* Social Links */}
           <div>
-            <h4 className="text-lg font-semibold text-yellow-400 mb-6">Connect With Us</h4>
-            <div className="flex gap-6 mb-8">
+            <h4 className="text-lg font-semibold text-blue-300 mb-6">Connect With Us</h4>
+            <div className="flex gap-4 mb-8">
               {[
                 { icon: Instagram, href: '#', label: 'Instagram' },
                 { icon: Linkedin, href: 'https://www.linkedin.com/in/byron-agong-729543263/', label: 'LinkedIn' },
@@ -92,49 +128,41 @@ const Footer = ({ watermarkText = "QUEENSY DIANI BnBs" }) => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-yellow-200 hover:text-yellow-400 transition-colors transform hover:scale-125 p-2"
+                  className="text-white hover:text-blue-300 transition-colors transform hover:scale-110 p-2"
                 >
                   <social.icon className="w-6 h-6" />
                 </a>
               ))}
             </div>
-          </div>
-
-          {/* Hire Developer Section */}
-          <div>
-            <h4 className="text-lg font-semibold text-yellow-400 mb-6">Hire the Developer</h4>
-            <div className="bg-yellow-900/20 rounded-xl p-6 border border-yellow-900">
-              <p className="text-yellow-200 mb-4">Looking for a skilled developer for your project?</p>
-              <div className="space-y-3">
-                <a
-                  href="tel:+254706880575"
-                  className="flex items-center gap-2 text-yellow-200 hover:text-yellow-400 transition-colors"
+            
+            {/* Newsletter Signup */}
+            <div className="space-y-4">
+              <h5 className="text-sm font-semibold text-blue-300">Newsletter</h5>
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-2 bg-navy-800 border border-navy-700 rounded-l-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-gradient-to-r from-oceanic-600 to-pool-600 text-white font-semibold rounded-2xl hover:from-oceanic-700 hover:to-pool-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
-                  <Phone className="w-4 h-4" />
-                  +254706880575
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/byron-agong-729543263/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-yellow-200 hover:text-yellow-400 transition-colors"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  Byron Agong
-                </a>
+                  Subscribe
+                </button>
               </div>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-16 pt-8 border-t border-yellow-900 text-center">
-          <p className="text-yellow-200">
+        <div className="mt-16 pt-8 border-t border-navy-700 text-center">
+          <p className="text-white">
             &copy; {new Date().getFullYear()} Queensy. All rights reserved.
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

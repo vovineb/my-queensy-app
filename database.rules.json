@@ -1,0 +1,45 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    
+    "properties": {
+      ".read": true,
+      ".write": "auth != null && auth.token.admin == true"
+    },
+    
+    "bookings": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$bookingId": {
+        ".read": "auth != null && (auth.uid == data.child('userId').val() || auth.token.admin == true)",
+        ".write": "auth != null && (auth.uid == data.child('userId').val() || auth.token.admin == true)",
+        ".validate": "newData.hasChildren(['propertyId', 'userId', 'checkIn', 'checkOut', 'guests', 'totalCost', 'status'])"
+      }
+    },
+    
+    "users": {
+      "$userId": {
+        ".read": "auth != null && auth.uid == $userId",
+        ".write": "auth != null && auth.uid == $userId",
+        ".validate": "newData.hasChildren(['email', 'displayName'])"
+      }
+    },
+    
+    "contacts": {
+      ".read": "auth != null && auth.token.admin == true",
+      ".write": true,
+      "$contactId": {
+        ".validate": "newData.hasChildren(['name', 'email', 'subject', 'message', 'createdAt'])"
+      }
+    },
+    
+    "reviews": {
+      ".read": true,
+      ".write": "auth != null",
+      "$reviewId": {
+        ".validate": "newData.hasChildren(['propertyId', 'userId', 'rating', 'comment', 'createdAt'])"
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ const SearchBar = ({ value, onChange, placeholder = "Search..." }) => {
             isDark 
               ? 'bg-transparent text-white placeholder-gray-400' 
               : 'bg-transparent text-gray-900 placeholder-gray-500'
-          } focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+          } focus:outline-none focus:ring-2 focus:ring-blue-400`}
         />
         <div className="absolute right-4 top-1/2 -translate-y-1/2">
           <Search className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />

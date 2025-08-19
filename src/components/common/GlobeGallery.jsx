@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const GlobeGallery = ({ images }) => {
+const GlobeGallery = ({ images = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRotating, setIsRotating] = useState(true);
+
+  // Safety check - if no images, return empty div
+  if (!images || images.length === 0) {
+    return (
+      <div className="relative w-full h-[600px] flex items-center justify-center">
+        <div className="text-center text-gray-500">
+          <p>No images available</p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (!isRotating) return;
@@ -110,7 +121,7 @@ const GlobeGallery = ({ images }) => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-400 rounded-full"
+          className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full"
         />
         <motion.div
           animate={{ 

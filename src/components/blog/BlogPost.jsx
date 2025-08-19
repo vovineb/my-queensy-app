@@ -27,7 +27,7 @@ const BlogPost = ({ post }) => {
         
         {/* Category Tag */}
         <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full">
-          <Tag className="w-4 h-4 text-yellow-400" />
+          <Tag className="w-4 h-4 text-blue-400" />
           <span className="text-sm text-white font-medium">{post.category}</span>
         </div>
       </div>
@@ -41,7 +41,7 @@ const BlogPost = ({ post }) => {
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl font-bold font-playfair group-hover:text-yellow-400 transition-colors">
+        <h2 className="text-2xl font-bold font-playfair group-hover:text-blue-400 transition-colors">
           {post.title}
         </h2>
 
@@ -52,7 +52,7 @@ const BlogPost = ({ post }) => {
 
         {/* Read More */}
         <motion.div
-          className="inline-flex items-center gap-2 text-yellow-400 font-medium"
+          className="inline-flex items-center gap-2 text-blue-400 font-medium"
           whileHover={{ x: 5 }}
         >
           Read More
