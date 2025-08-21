@@ -3,15 +3,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Star, MapPin, Users, Bed, Bath, Wifi, Shield, Coffee, Umbrella, TreePine, Code, Calculator, FileText, Monitor, Palette, Settings } from 'lucide-react';
 import HeroSection from '../common/HeroSection';
-import cImage from '../../assets/images/c.jpg';
-import c2Image from '../../assets/images/c2.jpg';
-import c3Image from '../../assets/images/c3.jpg';
-import dImage from '../../assets/images/d.jpg';
-import d1Image from '../../assets/images/d1.jpg';
-import d2Image from '../../assets/images/d2.jpg';
-import qImage from '../../assets/images/q.jpg';
-import q1Image from '../../assets/images/q1.jpg';
-import q2Image from '../../assets/images/q2.jpg';
+// Using images from public directory
+const cImage = '/images/c.jpg';
+const c2Image = '/images/c2.jpg';
+const c3Image = '/images/c3.jpg';
+const dImage = '/images/d.jpg';
+const d1Image = '/images/d1.jpg';
+const d2Image = '/images/d2.jpg';
+const qImage = '/images/q.jpg';
+const q1Image = '/images/q1.jpg';
+const q2Image = '/images/q2.jpg';
 import CountUp from 'react-countup';
 
 const HomePage = () => {
@@ -80,12 +81,12 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-ivory-50">
+    <main className="min-h-screen" role="main" aria-label="Queensy Properties - Home Page">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Properties Preview Section */}
-      <section className="py-24 bg-gradient-to-b from-ivory-50 via-blue-50 to-oceanic-50">
+      <section aria-labelledby="properties-heading" className="py-24 section-vintage-cream section-transition">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -94,134 +95,137 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-8 font-playfair leading-tight">
+            <h2 id="properties-heading" className="text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-8 font-playfair leading-tight">
               Our Premium Properties
             </h2>
-            <p className="text-xl md:text-2xl text-black max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl text-[var(--text-secondary)] max-w-4xl mx-auto font-medium leading-relaxed">
               Discover our handpicked selection of luxury accommodations, each offering unique experiences and world-class amenities
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20" role="list" aria-label="Featured properties">
             {/* Chameleon 1 */}
-            <motion.div
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -16, scale: 1.03 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group border border-ivory-200"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              role="listitem"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-64 sm:h-72 overflow-hidden">
                 <img src={cImage} alt="Chameleon 1" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-[var(--vintage-dark)]/40" />
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Chameleon 1</h3>
-                  <p className="text-oceanic-200 text-lg">Garden View Unit</p>
+                  <p className="text-[var(--vintage-cream)] text-lg">Garden View Unit</p>
                 </div>
               </div>
-              <div className="p-8 space-y-6">
-                <div className="flex items-center gap-6">
+              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
-                    <Bed className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">1 Bedroom</span>
+                    <Bed className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">1 Bedroom</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Bath className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">1 Bath</span>
+                    <Bath className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">1 Bath</span>
                   </div>
                 </div>
-                <p className="text-black text-lg mb-8 font-medium leading-relaxed">Cozy 1-bedroom unit perfect for couples or solo travelers seeking comfort and luxury.</p>
+                <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Cozy 1-bedroom unit perfect for couples or solo travelers seeking comfort and luxury.</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-black">KES 5,500</span>
-                  <Link to="/properties" className="btn btn-medium text-base font-bold px-6 py-3 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 5,500</span>
+                  <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
 
             {/* Chameleon 2 */}
-            <motion.div
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              whileHover={{ y: -16, scale: 1.03 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group border border-ivory-200"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              role="listitem"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-64 sm:h-72 overflow-hidden">
                 <img src={dImage} alt="Chameleon 2" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-[var(--vintage-dark)]/40" />
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Chameleon 2</h3>
-                  <p className="text-oceanic-200 text-lg">Beach Access Unit</p>
+                  <p className="text-[var(--vintage-cream)] text-lg">Beach Access Unit</p>
                 </div>
               </div>
-              <div className="p-8 space-y-6">
-                <div className="flex items-center gap-6">
+              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
-                    <Bed className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">1 Bedroom</span>
+                    <Bed className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">1 Bedroom</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Bath className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">1 Bath</span>
+                    <Bath className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">1 Bath</span>
                   </div>
                 </div>
-                <p className="text-black text-lg mb-8 font-medium leading-relaxed">Charming 1-bedroom accommodation with direct beach access and stunning ocean views.</p>
+                <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Charming 1-bedroom accommodation with direct beach access and stunning ocean views.</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-black">KES 5,500</span>
-                  <Link to="/properties" className="btn btn-medium text-base font-bold px-6 py-3 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 5,500</span>
+                  <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
 
             {/* Wendy's Penthouse */}
-            <motion.div
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              whileHover={{ y: -16, scale: 1.03 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group border border-ivory-200"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              role="listitem"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-64 sm:h-72 overflow-hidden">
                 <img src={qImage} alt="Wendy's Penthouse" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-[var(--vintage-dark)]/40" />
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Wendy's Penthouse</h3>
-                  <p className="text-oceanic-200 text-lg">Luxury Penthouse</p>
+                  <p className="text-[var(--vintage-cream)] text-lg">Luxury Penthouse</p>
                 </div>
               </div>
-              <div className="p-8 space-y-6">
-                <div className="flex items-center gap-6">
+              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
-                    <Bed className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">3 Bedrooms</span>
+                    <Bed className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">3 Bedrooms</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Bath className="w-6 h-6 text-oceanic-600" />
-                    <span className="text-black font-bold text-lg">3 Baths</span>
+                    <Bath className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">3 Baths</span>
                   </div>
                 </div>
-                <p className="text-black text-lg mb-8 font-medium leading-relaxed">Luxurious 3-bedroom penthouse with panoramic coastal views and premium amenities.</p>
+                <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Luxurious 3-bedroom penthouse with panoramic coastal views and premium amenities.</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-black">KES 15,500</span>
-                  <Link to="/properties" className="btn btn-medium text-base font-bold px-6 py-3 bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 15,500</span>
+                  <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           </div>
 
           <div className="text-center mt-12">
             <Link
               to="/properties"
-              className="btn btn-medium px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-lg rounded-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-blue-500/40"
+              className="btn btn-medium px-9 py-5 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-bold text-lg rounded-2xl hover:bg-[var(--vintage-brown)] hover:text-[var(--tech-white)] transition-all duration-300 transform hover:scale-105 shadow-xl border-none"
             >
               View All Properties
             </Link>
@@ -230,7 +234,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-gradient-to-b from-oceanic-50 via-pool-50 to-green-50">
+      <section aria-labelledby="services-heading" className="py-24 section-vintage-sage section-transition">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -239,38 +243,39 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-8 font-playfair leading-tight">
+            <h2 id="services-heading" className="text-5xl md:text-6xl font-bold text-[var(--tech-white)] mb-8 font-playfair leading-tight">
               Our Professional Services
             </h2>
-            <p className="text-xl md:text-2xl text-black max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl text-[var(--tech-white)]/90 max-w-4xl mx-auto font-medium leading-relaxed">
               Comprehensive business solutions to help your enterprise thrive in the digital age
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" role="list" aria-label="Our services">
             {features.map((feature, index) => (
-              <motion.div
+              <motion.article
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -12, scale: 1.02 }}
-                className="bg-white p-10 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 group border border-ivory-200"
+                className="bg-[var(--vintage-cream)] p-10 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 group border-none"
+                role="listitem"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-oceanic-100 to-pool-100 rounded-3xl flex items-center justify-center text-oceanic-600 mb-8 group-hover:bg-oceanic-600 group-hover:text-white transition-all duration-500">
+                <div className="w-20 h-20 bg-[var(--vintage-sage)] rounded-3xl flex items-center justify-center text-[var(--tech-white)] mb-8 group-hover:bg-[var(--vintage-brown)] group-hover:text-[var(--tech-white)] transition-all duration-500" aria-hidden="true">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-black mb-6 leading-tight">{feature.title}</h3>
-                <p className="text-black leading-relaxed font-medium text-lg">{feature.description}</p>
-              </motion.div>
+                <h3 className="text-2xl font-bold text-[var(--vintage-brown)] mb-6 leading-tight">{feature.title}</h3>
+                <p className="text-[var(--vintage-brown)] leading-relaxed font-medium text-lg">{feature.description}</p>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
       {/* List Your BnB Section */}
-      <section className="py-24 bg-gradient-to-b from-blue-200 via-blue-600 to-blue-800">
+      <section aria-labelledby="list-bnb-heading" className="py-24 section-secondary section-transition">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -280,10 +285,10 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-8 font-playfair leading-tight">
+              <h3 id="list-bnb-heading" className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-8 font-playfair leading-tight">
                 Why List With Queensy?
               </h3>
-              <div className="space-y-6">
+              <ul className="space-y-6 list-none pl-0" aria-label="Benefits of listing with Queensy">
                 {[
                   "Premium market positioning",
                   "Professional photography included",
@@ -292,32 +297,32 @@ const HomePage = () => {
                   "Marketing and promotion support",
                   "Easy booking management"
                 ].map((benefit, index) => (
-                  <motion.div
+                  <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-4"
+                    className="flex items-center gap-4 list-none"
                   >
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <span className="text-white font-semibold text-lg">{benefit}</span>
-                  </motion.div>
+                    <div className="w-3 h-3 bg-[var(--vintage-cream)] rounded-full" aria-hidden="true"></div>
+                    <span className="text-[var(--text-primary)] font-semibold text-lg">{benefit}</span>
+                  </motion.li>
                 ))}
-              </div>
+              </ul>
 
-              <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 border border-white/30">
-                <h4 className="text-xl font-semibold text-white mb-4">Web Development Services</h4>
-                <p className="text-white mb-6 font-medium text-lg leading-relaxed">
+              <aside className="bg-[var(--vintage-cream)]/20 backdrop-blur-md rounded-3xl p-8 border border-[var(--vintage-cream)]/30" aria-labelledby="web-dev-heading">
+                <h4 id="web-dev-heading" className="text-xl font-semibold text-[var(--text-primary)] mb-4">Web Development Services</h4>
+                <p className="text-[var(--text-primary)] mb-6 font-medium text-lg leading-relaxed">
                   Need a custom website for your property? We offer professional web development services tailored to your specific needs.
                 </p>
                 <Link
                   to="/contact"
-                  className="inline-block px-8 py-4 bg-white text-blue-600 font-semibold rounded-2xl hover:bg-blue-50 transition-all duration-300"
+                  className="inline-block px-9 py-5 bg-[var(--vintage-cream)] text-[var(--vintage-brown)] font-semibold rounded-2xl hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 border-none"
                 >
                   Get Custom Website
                 </Link>
-              </div>
+              </aside>
             </motion.div>
 
             <motion.div
@@ -325,29 +330,36 @@ const HomePage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-white/20 backdrop-blur-md rounded-3xl p-10 border border-white/30"
+              className="bg-[var(--vintage-cream)]/20 backdrop-blur-md rounded-3xl p-10 border border-[var(--vintage-cream)]/30"
+              role="form"
             >
-              <h3 className="text-3xl font-bold text-white mb-8">Ready to Get Started?</h3>
-              <form className="space-y-6">
+              <h3 id="contact-form-heading" className="text-3xl font-bold text-[var(--text-primary)] mb-8">Ready to Get Started?</h3>
+              <form className="space-y-6" aria-labelledby="contact-form-heading">
                 <div>
-                  <label className="block text-white mb-3 font-semibold text-lg">Property Name</label>
+                  <label htmlFor="property-name" className="block text-[var(--text-primary)] mb-3 font-semibold text-lg">Property Name</label>
                   <input
                     type="text"
-                    className="w-full px-6 py-4 rounded-2xl bg-white/20 border border-white/30 text-white placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-white focus:border-white text-lg"
+                    id="property-name"
+                    className="w-full px-6 py-4 rounded-2xl bg-[var(--vintage-cream)]/20 border border-[var(--vintage-cream)]/30 text-[var(--text-primary)] placeholder-[var(--text-primary)]/80 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-[var(--vintage-sage)] text-lg"
                     placeholder="Enter your property name"
                   />
                 </div>
                 <div>
-                  <label className="block text-white mb-3 font-semibold text-lg">Contact Email</label>
+                  <label htmlFor="contact-email" className="block text-[var(--text-primary)] mb-3 font-semibold text-lg">Contact Email</label>
                   <input
                     type="email"
-                    className="w-full px-6 py-4 rounded-2xl bg-white/20 border border-white/30 text-white placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-white focus:border-white text-lg"
+                    id="contact-email"
+                    className="w-full px-6 py-4 rounded-2xl bg-[var(--vintage-cream)]/20 border border-[var(--vintage-cream)]/30 text-[var(--text-primary)] placeholder-[var(--text-primary)]/80 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-[var(--vintage-sage)] text-lg"
                     placeholder="Enter your email"
                   />
                 </div>
                 <div>
-                  <label className="block text-white mb-3 font-semibold text-lg">Property Type</label>
-                  <select className="w-full px-6 py-4 rounded-2xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-white text-lg">
+                  <label htmlFor="property-type" className="block text-[var(--text-primary)] mb-3 font-semibold text-lg">Property Type</label>
+                  <select 
+                    id="property-type"
+                    className="w-full px-6 py-4 rounded-2xl bg-[var(--vintage-cream)]/20 border border-[var(--vintage-cream)]/30 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-[var(--vintage-sage)] text-lg"
+                    aria-label="Select property type"
+                  >
                     <option value="">Select property type</option>
                     <option value="apartment">Apartment</option>
                     <option value="house">House</option>
@@ -357,7 +369,8 @@ const HomePage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-5 bg-white text-blue-600 font-semibold text-lg rounded-2xl hover:bg-blue-50 transition-all duration-300"
+                  className="w-full py-6 bg-[var(--vintage-cream)] text-[var(--vintage-brown)] font-semibold text-lg rounded-2xl hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 border-none"
+                  aria-label="Submit your property application"
                 >
                   Submit Application
                 </button>
@@ -368,7 +381,7 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-b from-ivory-50 via-blue-50 to-oceanic-50">
+      <section className="py-24 section-primary section-transition" aria-labelledby="stats-heading">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -377,20 +390,21 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-8 font-playfair leading-tight">
+            <h2 id="stats-heading" className="text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-8 font-playfair leading-tight">
               Queensy by the Numbers
             </h2>
-            <p className="text-xl md:text-2xl text-black max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl text-[var(--text-primary)] max-w-4xl mx-auto font-medium leading-relaxed">
               Our commitment to excellence reflected in our achievements
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12" role="list" aria-label="Achievement statistics">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                role="listitem"
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -8, scale: 1.05 }}
@@ -400,7 +414,7 @@ const HomePage = () => {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 0.8, delay: index * 0.1 + 0.5, type: "spring" }}
-                  className="w-24 h-24 bg-gradient-to-br from-oceanic-100 to-pool-100 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:from-oceanic-200 group-hover:to-pool-200 transition-all duration-500"
+                  className="w-24 h-24 bg-[var(--vintage-sage)] rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:bg-[var(--vintage-brown)] transition-all duration-500"
                 >
                   <span className="text-4xl">{stat.icon}</span>
                 </motion.div>
@@ -411,11 +425,11 @@ const HomePage = () => {
                   viewport={{ once: true }}
                   className="space-y-3"
                 >
-                  <div className="text-5xl md:text-6xl font-bold text-black">
+                  <div className="text-5xl md:text-6xl font-bold text-[var(--text-primary)]">
                     <CountUp end={parseInt(stat.number)} duration={2.5} delay={index * 0.2} />
                     {stat.number.includes('+') && '+'}
                   </div>
-                  <div className="text-oceanic-600 font-semibold text-lg">{stat.label}</div>
+                  <div className="text-[var(--vintage-sage)] font-semibold text-lg">{stat.label}</div>
                 </motion.div>
               </motion.div>
             ))}
@@ -424,7 +438,7 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-b from-green-50 via-white to-ivory-50">
+      <section className="py-24 section-vintage-cream section-transition" aria-labelledby="testimonials-heading">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -433,10 +447,10 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-8 font-playfair leading-tight">
+            <h2 id="testimonials-heading" className="text-5xl md:text-6xl font-bold text-[var(--vintage-sage)] mb-8 font-playfair leading-tight">
               What Our Guests Say
             </h2>
-            <p className="text-xl md:text-2xl text-black max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl text-[var(--tech-black)] max-w-4xl mx-auto font-medium leading-relaxed">
               Don't just take our word for it - hear from our satisfied guests
             </p>
           </motion.div>
@@ -447,6 +461,8 @@ const HomePage = () => {
               animate={{ x: [0, -1000, 0] }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
               className="flex gap-8"
+              role="list"
+              aria-label="Guest testimonials"
             >
               {/* Duplicate testimonials for seamless loop */}
               {[...testimonials, ...testimonials].map((testimonial, index) => (
@@ -458,13 +474,14 @@ const HomePage = () => {
                   viewport={{ once: true }}
                   whileHover={{ y: -8, scale: 1.02 }}
                   className="min-w-[400px] bg-white p-10 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 border border-ivory-200"
+                  role="listitem"
                 >
                   <div className="flex items-center mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-black text-lg mb-8 italic font-medium leading-relaxed">"{testimonial.comment}"</p>
+                  <p className="text-[var(--vintage-brown)] text-lg mb-8 italic font-medium leading-relaxed">"{testimonial.comment}"</p>
                   <div className="flex items-center gap-4">
                     <img
                       src={testimonial.image}
@@ -472,8 +489,8 @@ const HomePage = () => {
                       className="w-16 h-16 rounded-full object-cover border-4 border-oceanic-100"
                     />
                     <div>
-                      <div className="font-bold text-black text-lg">{testimonial.name}</div>
-                      <div className="text-sm text-navy-600">{testimonial.location}</div>
+                      <div className="font-bold text-[var(--vintage-sage)] text-lg">{testimonial.name}</div>
+                      <div className="text-sm text-[var(--vintage-brown)]">{testimonial.location}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -484,7 +501,7 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-b from-oceanic-50 via-blue-100 to-blue-200">
+      <section className="py-24 bg-[var(--vintage-cream)]" aria-labelledby="cta-heading">
         <div className="container mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -493,22 +510,24 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="max-w-5xl mx-auto"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-8 font-playfair leading-tight">
+            <h2 id="cta-heading" className="text-5xl md:text-6xl font-bold text-[var(--tech-black)] mb-8 font-playfair leading-tight">
               Ready to Experience Paradise?
             </h2>
-            <p className="text-xl md:text-2xl text-black mb-12 max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl text-[var(--tech-black)] mb-12 max-w-4xl mx-auto font-medium leading-relaxed">
               Book your dream vacation today and create unforgettable memories in the heart of Diani Beach
             </p>
-            <div className="flex flex-col sm:flex-row gap-8 justify-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center" role="group" aria-label="Booking options">
               <Link
                 to="/properties"
-                className="px-12 py-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-xl rounded-3xl hover:from-blue-700 hover:to-blue-800 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-blue-500/40"
+                className="px-12 py-6 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-bold text-xl rounded-3xl hover:bg-[var(--vintage-brown)] transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-[var(--shadow-hover)]"
+                aria-label="Book your stay - View available properties"
               >
                 Book Your Stay
               </Link>
               <Link
                 to="/contact"
-                className="px-12 py-6 bg-gradient-to-r from-pool-600 to-oceanic-600 text-white font-bold text-xl rounded-3xl hover:from-pool-700 hover:to-oceanic-700 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-oceanic-500/40"
+                className="px-12 py-6 bg-[var(--vintage-brown)] text-[var(--tech-white)] font-bold text-xl rounded-3xl hover:bg-[var(--vintage-sage)] transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-[var(--shadow-hover)]"
+                aria-label="Contact us for more information"
               >
                 Contact Us
               </Link>
@@ -516,7 +535,7 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

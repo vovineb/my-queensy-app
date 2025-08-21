@@ -85,7 +85,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-blue-900 to-blue-800 pt-20">
+    <main className="min-h-screen bg-gradient-to-br from-black via-blue-900 to-blue-800 pt-20">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
           {/* Header */}
@@ -137,9 +137,12 @@ const SignUpPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" aria-labelledby="signup-form-heading">
+              <h2 id="signup-form-heading" className="sr-only">Sign Up Form</h2>
               {/* Name Field */}
-              <div>
+              <fieldset className="border-0 p-0 m-0">
+                <legend className="sr-only">Personal Information</legend>
+                <div>
                 <label htmlFor="name" className="block text-blue-200 text-sm font-medium mb-2">
                   Full Name *
                 </label>
@@ -177,9 +180,12 @@ const SignUpPage = () => {
                   />
                 </div>
               </div>
+              </fieldset>
 
               {/* Password Field */}
-              <div>
+              <fieldset className="border-0 p-0 m-0">
+                <legend className="sr-only">Password Information</legend>
+                <div>
                 <label htmlFor="password" className="block text-blue-200 text-sm font-medium mb-2">
                   Password *
                 </label>
@@ -232,6 +238,7 @@ const SignUpPage = () => {
                   </button>
                 </div>
               </div>
+              </fieldset>
 
               {/* Submit Button */}
               <button
@@ -240,7 +247,7 @@ const SignUpPage = () => {
                 className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
                   isSubmitting
                     ? 'bg-gray-500 cursor-not-allowed'
-                    : 'bg-blue-400 hover:bg-blue-500 text-black'
+                    : 'bg-blue-400 hover:bg-blue-500 text-[var(--vintage-brown)]'
                 }`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -250,17 +257,17 @@ const SignUpPage = () => {
             </form>
 
             {/* Login Link */}
-            <div className="mt-6 text-center">
+            <nav className="mt-6 text-center" aria-label="Account navigation">
               <p className="text-blue-200">
                 Already have an account?{' '}
                 <Link to="/home" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
                   Sign In
                 </Link>
               </p>
-            </div>
+            </nav>
 
             {/* Terms and Privacy */}
-            <div className="mt-6 text-center">
+            <footer className="mt-6 text-center" role="contentinfo">
               <p className="text-xs text-blue-200">
                 By creating an account, you agree to our{' '}
                 <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">
@@ -271,11 +278,11 @@ const SignUpPage = () => {
                   Privacy Policy
                 </a>
               </p>
-            </div>
+            </footer>
           </motion.div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

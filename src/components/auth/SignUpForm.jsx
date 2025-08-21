@@ -162,7 +162,7 @@ const SignUpForm = ({ onSubmit }) => {
         className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
           isSubmitting
             ? 'bg-gray-500 cursor-not-allowed'
-            : 'bg-blue-400 hover:bg-blue-500 text-black'
+            : 'bg-blue-400 hover:bg-blue-500 text-[var(--vintage-brown)]'
         }`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}

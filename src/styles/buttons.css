@@ -16,6 +16,7 @@
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-primary {

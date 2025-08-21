@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
-import { Menu, X, MapPin, Phone, Mail, Instagram, Linkedin, Twitter, MessageCircle, Sun, Moon, Star, Wifi, Utensils, Car, Waves, Bed, Bath, Users, Calendar, ChevronLeft, ChevronRight, Play, Check, AlertCircle, Info, Search } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ImageCarousel from './components/common/ImageCarousel';
-import Heading3D from './components/common/Heading3D';
-import GlobeGallery from './components/common/GlobeGallery';
+import { Check, AlertCircle, Info, X } from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import WhatsAppFloatingButton from './components/common/WhatsAppFloatingButton';
@@ -20,17 +15,23 @@ import ContactPage from './components/pages/ContactPage';
 import SignUpPage from './components/pages/SignUpPage';
 import ScrollToTop from './components/common/ScrollToTop';
 
-import { blogPosts } from './data/blogData';
-import './styles/carousel3d.css';
-import './styles/layout.css';
-import './styles/typography.css';
-import './styles/buttons.css';
-import StatsSection, { StatsCounter } from './components/common/StatsCounter';
 import BlogPage from './components/blog/BlogPage';
 import BlogDetail from './components/blog/BlogDetail';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
-import emailjs from '@emailjs/browser';
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB0m_RLdLwrN4H00pRcZ_EOMCq6bcsg68g",
+  authDomain: "my-queensy-app.firebaseapp.com",
+  projectId: "my-queensy-app",
+  storageBucket: "my-queensy-app.firebasestorage.app",
+  messagingSenderId: "199451469300",
+  appId: "1:199451469300:web:c2479e388c20b99ca6c5a1",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 // BlogDetail wrapper to handle slug parameter
 const BlogDetailWrapper = () => {
@@ -38,57 +39,7 @@ const BlogDetailWrapper = () => {
   return <BlogDetail slug={slug} />;
 };
 
-// Custom hook for back navigation
-const useBackNavigation = () => {
-  const navigate = useNavigate();
-  
-  const goBack = () => {
-    // Navigate back
-    navigate(-1);
-  };
-  
-  return { goBack };
-};
-
-// --- Firebase Configuration and Initialization ---
-// These global variables are provided by the Canvas environment.
-// Ensure they are defined or provide fallbacks for local development.
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-let firebaseApp;
-let db;
-let auth;
-
-// FIREBASE_API_KEY_INSERTION_POINT: Replace with your actual Firebase config
-const firebaseConfigDefaults = {
-  apiKey: "AIzaSyB0m_RLdLwrN4H00pRcZ_EOMCq6bcsg68g",
-  authDomain: "my-queensy-app.firebaseapp.com",
-  projectId: "my-queensy-app",
-  storageBucket: "my-queensy-app.firebasestorage.app",
-  messagingSenderId: "199451469300",
-  appId:"1:199451469300:web:c2479e388c20b99ca6c5a1",
-};
-
-// Use provided config if available, otherwise use defaults for local testing
-const currentFirebaseConfig = Object.keys(firebaseConfig).length > 0 ? firebaseConfig : firebaseConfigDefaults;
-
-// Firebase config loaded
-
-if (currentFirebaseConfig.projectId && !firebaseApp) { // Initialize only once
-  try {
-    firebaseApp = initializeApp(currentFirebaseConfig);
-    db = getFirestore(firebaseApp);
-    auth = getAuth(firebaseApp);
-    // Firebase initialized successfully
-  } catch (error) {
-    // Log error for debugging but don't expose sensitive info
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Firebase initialization error:', error);
-    }
-  }
-}
+// Property data for the application
 
 // GOOGLE_MAPS_API_KEY_INSERTION_POINT: Replace with your actual Google Maps API Key
 const GOOGLE_MAPS_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"; // Replace with your Google Maps API Key
@@ -176,166 +127,6 @@ const propertiesData = [
     Enjoy the convenience of a fully equipped kitchen with a modern fridge and cooker, hot showers, complimentary high-speed WiFi, and Netflix pre-paid on all TVs. The spacious living areas are designed for both relaxation and entertainment, featuring contemporary furnishings and stunning coastal-inspired decor.
     Special discounts are available for extended stays, and co-sharing options make luxury accessible. Each bedroom is thoughtfully designed as a private sanctuary, while common areas encourage gathering and creating unforgettable memories with loved ones.
     The penthouse represents the pinnacle of coastal luxury living, where every detail has been carefully curated to exceed expectations and create lasting memories of your Kenyan coastal adventure. From the panoramic ocean views to the personalized service, every moment here is designed to be exceptional.`
-  }
-];
-
-const blogPostsData = [
-  {
-    id: 'things-to-do-kenya',
-    title: "Things to do when in Kenya: A Local's Guide",
-    slug: 'things-to-do-kenya',
-    image: 'https://placehold.co/400x250/1a1a1a/d4af37?text=Kenya+Adventures',
-    excerpt: 'Discover the hidden gems and authentic experiences that make Kenya truly magical, from a local perspective.',
-    content: `Kenya is a land of incredible diversity, offering experiences that go far beyond the typical tourist trail. As someone who has lived and breathed this beautiful country, I'm excited to share the authentic Kenya that locals know and love.
-
-    **Coastal Adventures in Diani and Mombasa**
-
-    Start your journey along our pristine coastline. Diani Beach isn't just about sunbathing – it's about connecting with a living ecosystem. Wake up early to witness dhow boats returning with the night's catch, their triangular sails silhouetted against the dawn sky.
-
-    In Mombasa's Old Town, lose yourself in the narrow streets where Swahili, Arab, and Portuguese influences create architectural poetry. Visit Fort Jesus not just as a tourist, but to understand the complex history that shaped our coastal culture.
-
-    **Safari Beyond the Obvious**
-
-    While Maasai Mara is spectacular, consider the lesser-known conservancies like Ol Pejeta or Samburu. Here, you'll encounter species found nowhere else – the Grevy's zebra, reticulated giraffe, and Somali ostrich paint a different picture of African wildlife.
-
-    **Cultural Immersion**
-
-    Visit a Maasai village, but choose community-run tourism initiatives where your visit directly benefits local families. Learn traditional beadwork, participate in cattle herding, and understand the delicate balance between ancient traditions and modern life.
-
-    **Nairobi's Hidden Side**
-
-    Beyond the safari starting point, Nairobi pulses with creativity. Explore the Karen Blixen Museum, then venture to local art galleries in the Karen area. The city's coffee culture rivals any global capital – try single-origin beans from different Kenyan regions.
-
-    **Practical Tips from a Local**
-
-    - Always carry cash in smaller denominations
-    - Learn basic Swahili greetings – locals appreciate the effort
-    - Try ugali, nyama choma, and fresh tropical fruits from roadside vendors
-    - Respect photography customs, especially in rural areas
-    - Pack layers – our climate varies dramatically with altitude`
-  },
-  {
-    id: 'hidden-gems-diani-mombasa',
-    title: 'Hidden Gems: Places to Visit in Diani & Mombasa',
-    slug: 'hidden-gems-diani-mombasa',
-    image: 'https://placehold.co/400x250/1a1a1a/d4af37?text=Hidden+Gems',
-    excerpt: 'Uncover the secret spots and local favorites that most tourists never discover in coastal Kenya.',
-    content: `The Kenyan coast holds secrets that even guidebooks miss. After years of exploring every corner of Diani and Mombasa, I've discovered places that capture the true spirit of coastal Kenya.
-
-    **Diani's Secret Spots**
-
-    **Kongo Mosque Ruins**: Hidden in the coastal forest, these 14th-century ruins whisper stories of ancient trade routes. The walk through indigenous forest reveals colobus monkeys and rare bird species.
-
-    **Chale Island**: Accessible only at low tide, this tiny island offers pristine coral gardens perfect for snorkeling. Local fishermen know the best spots – ask politely and they might share their secrets.
-
-    **Shimba Hills National Reserve**: Just 30 minutes from Diani, this forest reserve is home to the rare sable antelope. The Sheldrick Falls hike rewards you with a hidden waterfall perfect for a refreshing dip.
-
-    **Mombasa's Local Treasures**
-
-    **Spice Markets of Old Town**: Beyond the tourist shops, local spice vendors sell cardamom, cinnamon, and star anise that locals use daily. Join a cooking class to understand how these spices transform simple ingredients.
-
-    **Pembe za Ndovu (Elephant Tusks)**: While tourists photograph the iconic tusks, locals know the small tea shops nearby serve the best kahawa tungu (bitter coffee) and mahamri (coastal donuts).
-
-    **Bamburi Nature Trail**: This former quarry has been transformed into a nature sanctuary. Evening visits offer chances to spot bushbabies and enjoy traditional taarab music performances.
-
-    **Insider Experiences**
-
-    **Local Fish Markets**: Visit Kilifi Creek fish market at dawn to see the night's catch auction. The energy is infectious, and you'll understand why fresh fish tastes different here.
-
-    **Traditional Dhow Building**: In villages near Kilifi, master craftsmen still build dhows using techniques passed down through generations. Witnessing this ancient art is truly special.
-
-    **Community Beach Cleanups**: Join local environmental groups for weekend beach cleanups. It's a meaningful way to connect with conservation-minded locals while protecting our pristine coastline.
-
-    These hidden gems offer authentic connections with local culture and natural beauty that typical tourist routes simply cannot match.`
-  },
-  {
-    id: 'budgeting-safari-kenya',
-    title: 'Budgeting for Your Safari: Price for Normal Things (e.g., a Toothbrush)',
-    slug: 'budgeting-safari-kenya',
-    image: 'https://placehold.co/400x250/1a1a1a/d4af37?text=Safari+Budget',
-    excerpt: 'A practical guide to understanding costs in Kenya, from everyday items to safari experiences.',
-    content: `Planning a Kenyan safari involves more than just booking game drives. Understanding local prices helps you budget realistically and avoid tourist traps while supporting local communities fairly.
-
-    **Everyday Items (Nairobi/Mombasa Prices)**
-
-    - Toothbrush: KES 150-300 ($1-2)
-    - Bottled water (500ml): KES 50-80 ($0.35-0.55)
-    - Local SIM card: KES 100 plus credit
-    - Sunscreen (quality brand): KES 800-1,200 ($5.50-8.25)
-    - Insect repellent: KES 600-900 ($4-6)
-    - Basic first aid supplies: KES 500-1,000 ($3.50-7)
-
-    **Food & Dining**
-
-    **Local Restaurants**:
-    - Nyama choma (grilled meat): KES 500-800 ($3.50-5.50)
-    - Ugali and vegetables: KES 200-350 ($1.40-2.40)
-    - Fresh fruit juice: KES 100-200 ($0.70-1.40)
-
-    <strong>Mid-range Restaurants</strong>:
-    - International cuisine: KES 1,500-2,500 ($10-17)
-    - Seafood at coast: KES 2,000-3,500 ($14-24)
-
-    **Street Food** (safe and delicious):
-    - Samosas: KES 20-30 each
-    - Mandazi (sweet bread): KES 10-20 each
-    - Fresh coconut: KES 50-100
-
-    **Transportation**
-
-    - Matatu (local bus) in city: KES 30-80
-    - Boda boda (motorcycle taxi): KES 100-300 for short distances
-    - Uber/Bolt in Nairobi: KES 200-600 for city trips
-    - Tuk-tuk in Mombasa: KES 150-400
-    - Safari vehicle hire: KES 15,000-25,000 per day
-
-    **Safari-Specific Costs**
-
-    **Park Entrance Fees**:
-    - Maasai Mara: $70-80 per person per day
-    - Amboseli: $60 per person per day
-    - Tsavo: $52 per person per day
-    - Conservancies: $40-100 per person per day
-
-    **Accommodation**:
-    - Budget camps: $50-150 per person per night
-    - Mid-range lodges: $200-400 per person per night
-    - Luxury lodges: $500-1,500 per person per night
-
-    **Money-Saving Tips**
-
-    1. **Shop at local supermarkets**: Nakumatt, Carrefour, or Tuskys for supplies
-    2. **Eat where locals eat**: Authentic food at fair prices
-    3. **Negotiate respectfully**: Expected in markets, not in established shops
-    4. **Group safaris**: Share costs for vehicles and guides
-    5. **Visit during shoulder seasons**: March-May and November offer lower prices
-
-    **Tipping Guidelines**
-
-    - Safari guide: $10-15 per person per day
-    - Hotel staff: KES 200-500 per day
-    - Restaurant service: 10% if not included
-    - Porters: KES 200-300 per bag
-
-    **Budget Planning Framework**
-
-    **Budget Safari** (per person for 7 days):
-    - Accommodation: $350-750
-    - Meals: $200-350
-    - Park fees: $300-400
-    - Transport: $200-400
-    - Miscellaneous: $150-250
-    **Total**: $1,200-2,150
-
-    **Mid-range Safari** (per person for 7 days):
-    - Accommodation: $1,400-2,800
-    - Meals: $350-600
-    - Park fees: $400-500
-    - Transport: $300-600
-    - Miscellaneous: $250-400
-    **Total**: $2,700-4,900
-
-    Remember, supporting local communities through fair pricing creates sustainable tourism that benefits everyone.`
   }
 ];
 
@@ -448,10 +239,10 @@ const AppContent = () => {
     <div className="App">
       <Header isDark={isDark} toggleTheme={toggleTheme} />
       <Suspense fallback={
-        <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
-            <p className="text-gray-300">Loading...</p>
+            <div className="w-16 h-16 border-4 border-[var(--vintage-sage)] border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p className="text-[var(--text-secondary)]">Fetching Queensy Updates...</p>
               </div>
           </div>
       }>
@@ -489,7 +280,7 @@ const App = () => {
     // Initialize Firebase
     const initializeFirebase = async () => {
       try {
-        setLoadingMessage("Initializing Firebase...");
+        setLoadingMessage("Fetching Queensy Updates...");
         setLoadingProgress(20);
         
         // Test Firebase connection
@@ -553,13 +344,10 @@ const App = () => {
   // Loading screen with custom messages
   if (!isAuthReady && !error) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
         <div className="text-center space-y-6">
-          {/* Loading animation */}
-          <div className="relative">
-            <div className="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
-            <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-blue-600 rounded-full animate-ping mx-auto"></div>
-          </div>
+          {/* Single Loading animation */}
+          <div className="w-16 h-16 border-4 border-[var(--vintage-sage)] border-t-transparent rounded-full animate-spin mx-auto"></div>
           
           {/* Progress bar */}
           <div className="w-64 bg-gray-800 rounded-full h-2 mx-auto">
@@ -598,10 +386,10 @@ const App = () => {
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-2xl font-display font-bold text-red-400">
+            <h2 className="text-2xl font-display font-bold text-red-400 font-sans">
               Application Error
             </h2>
-            <p className="text-gray-300 font-body">
+            <p className="text-gray-300 font-body font-sans">
               {error.message || 'Something went wrong while loading the application.'}
             </p>
             

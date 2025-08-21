@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Car, Star, Chevron
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 const ContactPage = () => {
+  // Form state management
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,6 +46,7 @@ const ContactPage = () => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -83,88 +85,88 @@ const ContactPage = () => {
   const { isDark } = useContext(ThemeContext);
 
   return (
-    <div className={`min-h-screen pt-20 ${isDark ? 'bg-navy-900' : 'bg-ivory-50'}`}>
+    <main className={`min-h-screen pt-20 ${isDark ? 'bg-navy-900' : 'bg-ivory-50'}`}>
       <div className="container mx-auto px-6 py-16">
         {/* Header */}
-        <motion.div
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-black font-playfair mb-8 leading-tight">
+          <h1 id="contact-heading" className="text-5xl md:text-6xl font-bold text-[var(--text-primary)] font-playfair mb-8 leading-tight">
             Get in Touch
           </h1>
-          <p className="text-xl text-black max-w-3xl mx-auto leading-relaxed font-medium">
+          <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed font-medium">
             Ready to start your journey? Contact us today and let's make your dream vacation a reality
           </p>
-        </motion.div>
+        </motion.header>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 max-w-7xl mx-auto">
           {/* Contact Information */}
-          <div className="space-y-12">
-            <h2 className={`text-3xl font-bold font-playfair mb-8 ${isDark ? 'text-ivory-100' : 'text-navy-900'}`}>
+          <section aria-labelledby="contact-info-heading" className="space-y-12">
+            <h2 id="contact-info-heading" className="text-3xl font-bold font-playfair mb-8 text-[var(--text-primary)]">
               Contact Information
             </h2>
 
-            <div className="space-y-8">
+            <address className="space-y-8 not-italic" role="group" aria-label="Contact details">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-oceanic-100 rounded-xl flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-oceanic-600" />
+                <div className="w-12 h-12 bg-[var(--vintage-cream)] rounded-xl flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-[var(--vintage-sage)]" aria-hidden="true" />
                 </div>
-                <div>
-                  <h3 className="text-black font-bold">Phone</h3>
-                  <p className="text-blue-700 font-semibold">+254 707 335 604</p>
-                  <p className="text-blue-600 text-sm">Available 24/7</p>
+                <div className="form-group">
+                  <h3 className="text-[var(--text-primary)] font-bold">Phone</h3>
+                  <p className="text-[var(--vintage-brown)] font-semibold">+254 707 335 604</p>
+                  <p className="text-[var(--text-secondary)] text-sm">Available 24/7</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-oceanic-100 rounded-xl flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-oceanic-600" />
+                <div className="w-12 h-12 bg-[var(--vintage-cream)] rounded-xl flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-[var(--vintage-sage)]" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-black font-bold">Email</h3>
-                  <p className="text-blue-700 font-semibold">info@queensy.com</p>
-                  <p className="text-blue-600 text-sm">We'll respond within 2 hours</p>
+                  <h3 className="text-[var(--text-primary)] font-bold">Email</h3>
+                  <p className="text-[var(--vintage-brown)] font-semibold">info@queensy.com</p>
+                  <p className="text-[var(--text-secondary)] text-sm">We'll respond within 2 hours</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-oceanic-100 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-oceanic-600" />
+                <div className="w-12 h-12 bg-[var(--vintage-cream)] rounded-xl flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-[var(--vintage-sage)]" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-black font-bold">Address</h3>
-                  <p className="text-blue-700 font-semibold">Diani Beach, Kenya</p>
-                  <p className="text-blue-600 text-sm">South Coast, Mombasa</p>
+                  <h3 className="text-[var(--text-primary)] font-bold">Address</h3>
+                  <p className="text-[var(--vintage-brown)] font-semibold">Diani Beach, Kenya</p>
+                  <p className="text-[var(--text-secondary)] text-sm">South Coast, Mombasa</p>
                 </div>
               </div>
-            </div>
+            </address>
 
             {/* Location Features */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-ivory-200">
-              <h3 className="text-xl font-semibold text-navy-900 mb-6">Location Highlights</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-navy-700">
-                  <MapPin className="w-5 h-5 text-oceanic-600" />
+            <aside className="bg-[var(--card-bg)] rounded-2xl p-8 shadow-lg border border-[var(--vintage-cream)]" aria-labelledby="location-highlights-heading">
+              <h3 id="location-highlights-heading" className="text-xl font-semibold text-[var(--text-primary)] mb-6">Location Highlights</h3>
+              <ul className="space-y-4 list-none p-0" role="list" aria-label="Location highlights">
+                <li className="flex items-center gap-3 text-[var(--text-primary)]" role="listitem">
+                  <MapPin className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
                   Walking distance to pristine Diani Beach
-                </div>
-                <div className="flex items-center gap-3 text-navy-700">
-                  <Car className="w-5 h-5 text-navy-400" />
+                </li>
+                <li className="flex items-center gap-3 text-[var(--text-primary)]" role="listitem">
+                  <Car className="w-5 h-5 text-[var(--vintage-brown)]" aria-hidden="true" />
                   20 minutes drive to Mombasa city center
-                </div>
-                <div className="flex items-center gap-3 text-navy-700">
-                  <Star className="w-5 h-5 text-yellow-400" />
+                </li>
+                <li className="flex items-center gap-3 text-[var(--text-primary)]" role="listitem">
+                  <Star className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
                   Rated 5 stars by our guests
-                </div>
-              </div>
-            </div>
-          </div>
+                </li>
+              </ul>
+            </aside>
+          </section>
 
           {/* Contact Form */}
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-navy-900 font-playfair mb-8">
+          <section aria-labelledby="contact-form-heading" className="space-y-8">
+            <h2 id="contact-form-heading" className="text-3xl font-bold text-[var(--text-primary)] font-playfair mb-8">
               Send us a Message
             </h2>
             
@@ -173,6 +175,8 @@ const ContactPage = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-8 p-6 bg-green-50 border border-green-200 rounded-2xl"
+                role="alert"
+                aria-live="polite"
               >
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-green-600" />
@@ -186,6 +190,8 @@ const ContactPage = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-8 p-6 bg-red-50 border border-red-200 rounded-2xl"
+                role="alert"
+                aria-live="assertive"
               >
                 <div className="flex items-center gap-3">
                   <AlertCircle className="w-6 h-6 text-red-600" />
@@ -194,10 +200,10 @@ const ContactPage = () => {
               </motion.div>
             )}
             
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-8" aria-labelledby="contact-form-heading" role="form">
+              <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 border-0 p-0 m-0">
                 <div>
-                  <label htmlFor="name" className="block text-navy-700 text-lg font-medium mb-3">
+                  <label htmlFor="name" className="block text-[var(--text-primary)] text-lg font-medium mb-3">
                     Name *
                   </label>
                   <input
@@ -207,13 +213,13 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 rounded-xl border border-ivory-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-oceanic-500 focus:border-transparent text-lg"
+                    className="w-full px-6 py-4 rounded-xl border border-[var(--vintage-cream)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-transparent text-lg font-sans"
                     placeholder="Enter your full name"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-navy-700 text-lg font-medium mb-3">
+                  <label htmlFor="email" className="block text-[var(--text-primary)] text-lg font-medium mb-3">
                     Email *
                   </label>
                   <input
@@ -223,56 +229,57 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-6 py-4 rounded-xl border border-ivory-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-oceanic-500 focus:border-transparent text-lg"
+                    className="w-full px-6 py-4 rounded-xl border border-[var(--vintage-cream)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-transparent text-lg font-sans"
                     placeholder="Enter your email address"
                   />
                 </div>
-              </div>
-              
-              <div>
-                <label htmlFor="subject" className="block text-navy-700 text-lg font-medium mb-3">
-                  Subject *
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-6 py-4 rounded-xl border border-ivory-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-oceanic-500 focus:border-transparent text-lg"
-                  placeholder="What's this about?"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-navy-700 text-lg font-medium mb-3">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  className="w-full px-6 py-4 rounded-xl border border-ivory-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-oceanic-500 focus:border-transparent text-lg resize-none"
-                  placeholder="Tell us about your inquiry..."
-                />
-              </div>
+                
+                <div>
+                  <label htmlFor="subject" className="block text-[var(--text-primary)] text-lg font-medium mb-3">
+                    Subject *
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-6 py-4 rounded-xl border border-[var(--vintage-cream)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-transparent text-lg font-sans"
+                    placeholder="What's this about?"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-[var(--text-primary)] text-lg font-medium mb-3">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={6}
+                    className="w-full px-6 py-4 rounded-xl border border-[var(--vintage-cream)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--vintage-sage)] focus:border-transparent text-lg resize-none font-sans"
+                    placeholder="Tell us about your inquiry..."
+                  />
+                </div>
+              </fieldset>
               
               <button
                 type="submit"
-                className="w-full py-5 px-8 bg-gradient-to-r from-oceanic-600 to-pool-600 text-white font-bold text-lg rounded-2xl hover:from-oceanic-700 hover:to-pool-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-oceanic-500/30"
+                className="w-full py-5 px-8 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-bold text-lg rounded-2xl hover:bg-[var(--vintage-brown)] transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-[var(--vintage-sage)]/30"
+                aria-label="Submit contact form"
               >
                 Send Message
               </button>
             </form>
-          </div>
+          </section>
         </div>
 
         {/* FAQ Section */}
-        <section className="mt-24">
+        <section aria-labelledby="faq-heading" className="mt-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -280,15 +287,15 @@ const ContactPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-navy-900 font-playfair mb-8 leading-tight">
+            <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] font-playfair mb-8 leading-tight">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-navy-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed">
               Get quick answers to common questions about your stay
             </p>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-6" role="region" aria-labelledby="faq-heading">
             {faqData.map((faq, index) => (
               <motion.div
                 key={faq.id}
@@ -296,17 +303,19 @@ const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-lg border border-blue-300 overflow-hidden"
+                className="bg-[var(--vintage-sage)] rounded-2xl shadow-lg border border-[var(--vintage-cream)] overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFAQ(openFAQ === faq.id ? null : faq.id)}
-                  className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-blue-800 transition-all duration-300"
+                  className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-[var(--vintage-brown)] transition-all duration-300 font-sans"
+                  aria-expanded={openFAQ === faq.id}
+                  aria-controls={`faq-answer-${faq.id}`}
                 >
-                  <h3 className="text-lg font-bold text-white">{faq.question}</h3>
+                  <h3 id={`faq-question-${faq.id}`} className="text-lg font-bold text-[var(--tech-white)]">{faq.question}</h3>
                   {openFAQ === faq.id ? (
-                    <ChevronUp className="w-6 h-6 text-white" />
+                    <ChevronUp className="w-6 h-6 text-[var(--tech-white)]" aria-hidden="true" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white" />
+                    <ChevronDown className="w-6 h-6 text-[var(--tech-white)]" aria-hidden="true" />
                   )}
                 </button>
                 
@@ -317,9 +326,12 @@ const ContactPage = () => {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                     className="px-8 pb-6"
+                    id={`faq-answer-${faq.id}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${faq.id}`}
                   >
-                    <div className="border-t border-blue-400 pt-4">
-                      <p className="text-white font-medium leading-relaxed">{faq.answer}</p>
+                    <div className="border-t border-[var(--vintage-cream)] pt-4">
+                      <p className="text-[var(--tech-white)] font-medium leading-relaxed">{faq.answer}</p>
                     </div>
                   </motion.div>
                 )}
@@ -328,7 +340,7 @@ const ContactPage = () => {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -124,7 +124,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             <Calendar className="w-6 h-6 text-oceanic-600" />
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-black">Select Your Dates</h3>
+            <h3 className="text-2xl font-bold text-[var(--vintage-brown)]">Select Your Dates</h3>
             <p className="text-gray-600">Choose your check-in and check-out dates</p>
           </div>
         </div>
@@ -140,7 +140,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             </svg>
           </button>
           
-          <span className="text-lg font-semibold text-black min-w-[120px] text-center">
+          <span className="text-lg font-semibold text-[var(--vintage-brown)] min-w-[120px] text-center">
             {getMonthName(currentMonth)}
           </span>
           
@@ -199,7 +199,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
                   }
                   ${!isAvailable 
                     ? 'bg-gray-100 text-gray-400' 
-                    : 'bg-white text-black'
+                    : 'bg-white text-[var(--vintage-brown)]'
                   }
                   ${isToday 
                     ? 'ring-2 ring-oceanic-400' 
@@ -227,7 +227,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
           <div className="w-10 h-10 bg-gradient-to-br from-pool-100 to-oceanic-100 rounded-xl flex items-center justify-center">
             <Users className="w-5 h-5 text-pool-600" />
           </div>
-          <h4 className="text-lg font-semibold text-black">Number of Guests</h4>
+          <h4 className="text-lg font-semibold text-[var(--vintage-brown)]">Number of Guests</h4>
         </div>
         
         <div className="flex items-center gap-4">
@@ -240,7 +240,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             </svg>
           </button>
           
-          <span className="text-2xl font-bold text-black min-w-[40px] text-center">{guests}</span>
+          <span className="text-2xl font-bold text-[var(--vintage-brown)] min-w-[40px] text-center">{guests}</span>
           
           <button
             onClick={() => onGuestsChange(Math.min(property.maxGuests || 4, guests + 1))}
@@ -271,13 +271,13 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             <div className="w-10 h-10 bg-gradient-to-br from-oceanic-100 to-pool-100 rounded-xl flex items-center justify-center">
               <DollarSign className="w-5 h-5 text-oceanic-600" />
             </div>
-            <h4 className="text-lg font-semibold text-black">Price Breakdown</h4>
+            <h4 className="text-lg font-semibold text-[var(--vintage-brown)]">Price Breakdown</h4>
           </div>
           
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Check-in:</span>
-              <span className="font-medium text-black">
+              <span className="font-medium text-[var(--vintage-brown)]">
                 {selectedStartDate.toLocaleDateString('en-US', { 
                   weekday: 'short', 
                   month: 'short', 
@@ -288,7 +288,7 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Check-out:</span>
-              <span className="font-medium text-black">
+              <span className="font-medium text-[var(--vintage-brown)]">
                 {selectedEndDate.toLocaleDateString('en-US', { 
                   weekday: 'short', 
                   month: 'short', 
@@ -299,21 +299,21 @@ const PropertyCalendar = ({ property, onDateSelect, onGuestsChange, selectedDate
             
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Nights:</span>
-              <span className="font-medium text-black">
+              <span className="font-medium text-[var(--vintage-brown)]">
                 {Math.ceil((selectedEndDate - selectedStartDate) / (1000 * 60 * 60 * 24))}
               </span>
             </div>
             
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Price per night:</span>
-              <span className="font-medium text-black">
+              <span className="font-medium text-[var(--vintage-brown)]">
                 KES {isReturningCustomer ? property.discountedPrice : property.price}
               </span>
             </div>
             
             <div className="border-t border-oceanic-200 pt-3">
               <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold text-black">Total:</span>
+                <span className="text-lg font-semibold text-[var(--vintage-brown)]">Total:</span>
                 <span className="text-2xl font-bold text-oceanic-600">
                   KES {calculateTotalPrice().toLocaleString()}
                 </span>

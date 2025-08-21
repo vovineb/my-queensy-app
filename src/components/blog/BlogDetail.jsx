@@ -30,9 +30,9 @@ const convertMarkdownToHTML = (markdown) => {
   
       return markdown
       // Headers
-      .replace(/^### (.*$)/gim, '<h3 class="text-2xl font-display font-semibold text-blue-300 mb-4 mt-6">$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-display font-bold text-blue-400 mb-6 mt-8">$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-display font-bold text-blue-400 mb-8 mt-10">$1</h1>')
+      .replace(/^### (.*$)/gim, '<h3 class="text-2xl font-display font-semibold text-blue-300 mb-4 mt-6" id="heading-$1">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-display font-bold text-blue-400 mb-6 mt-8" id="heading-$1">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-display font-bold text-blue-400 mb-8 mt-10" id="heading-$1">$1</h1>')
       
       // Bold text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-blue-400 font-semibold">$1</strong>')
@@ -48,6 +48,8 @@ const convertMarkdownToHTML = (markdown) => {
     
     // Lists
     .replace(/^\* (.*$)/gim, '<li class="ml-4 mb-2">$1</li>')
+    // Wrap lists in ul tags
+    .replace(/<li class="ml-4 mb-2">(.*?)<\/li>\s*<li class="ml-4 mb-2">/g, '<ul role="list" class="list-disc pl-6 mb-6"><li class="ml-4 mb-2">$1</li><li class="ml-4 mb-2">')
     .replace(/^- (.*$)/gim, '<li class="ml-4 mb-2">$1</li>')
     
     // Wrap lists in ul tags
@@ -115,14 +117,14 @@ const BlogDetail = ({ slug }) => {
   };
 
   return (
-    <motion.div
+    <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-black text-white pt-32 pb-16"
     >
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
-        <div className="relative aspect-[21/9] rounded-2xl overflow-hidden mb-8">
+        <header className="relative aspect-[21/9] rounded-2xl overflow-hidden mb-8">
           <img
             src={post.image}
             alt={post.title}
@@ -136,6 +138,7 @@ const BlogDetail = ({ slug }) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
               className="space-y-4"
+              role="contentinfo"
             >
               {/* Category & Date */}
               <div className="flex items-center gap-4 flex-wrap">
@@ -163,77 +166,86 @@ const BlogDetail = ({ slug }) => {
               </h1>
             </motion.div>
           </div>
-        </div>
+        </header>
 
         {/* Content */}
-        <div className="prose prose-lg prose-invert mx-auto">
+        <article className="prose prose-lg prose-invert mx-auto">
           {/* Back Button */}
-          <motion.button
-            onClick={goBack}
-            className="flex items-center gap-2 text-blue-400 hover:text-blue-500 mb-8 font-medium transition-colors"
-            whileHover={{ x: -5 }}
-          >
-            <ChevronLeft className="w-5 h-5" />
-            Back to Blog
-          </motion.button>
+          <nav aria-label="Blog navigation">
+            <motion.button
+              onClick={goBack}
+              className="flex items-center gap-2 text-blue-400 hover:text-blue-500 mb-8 font-medium transition-colors"
+              whileHover={{ x: -5 }}
+            >
+              <ChevronLeft className="w-5 h-5" />
+              Back to Blog
+            </motion.button>
+          </nav>
 
           {/* Share Button */}
                       <motion.button
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({
-                    title: post.title,
-                    url: window.location.href
-                  });
-                } else {
-                  navigator.clipboard.writeText(window.location.href);
-                  alert('Link copied to clipboard!');
-                }
-              }}
-              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 font-medium transition-colors"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Share2 className="w-5 h-5" />
-              Share Article
-            </motion.button>
+            onClick={() => {
+              if (navigator.share) {
+                navigator.share({
+                  title: post.title,
+                  url: window.location.href
+                });
+              } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+              }
+            }}
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 mb-8 font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Share2 className="w-5 h-5" />
+            Share Article
+          </motion.button>
 
           {/* Article Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="blog-content"
-            dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
-          />
+          <section
+            aria-label="Article content"
+            className="blog-content font-sans"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
+            />
+          </section>
 
           {/* Article Footer */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+          <footer
             className="mt-12 pt-8 border-t border-gray-700"
           >
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
-              <User className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <p className="text-blue-400 font-semibold">{post.author}</p>
-              <p className="text-gray-400 text-sm">{post.date}</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                    <User className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-blue-400 font-semibold">{post.author}</p>
+                    <p className="text-gray-400 text-sm">{post.date}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <span className="text-gray-400 text-sm">{post.readTime}</span>
+                  <span className="text-gray-400 text-sm">•</span>
+                  <span className="text-gray-400 text-sm">{post.category}</span>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-4">
-                <span className="text-gray-400 text-sm">{post.readTime}</span>
-                <span className="text-gray-400 text-sm">•</span>
-                <span className="text-gray-400 text-sm">{post.category}</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          </footer>
+        </article>
       </div>
-    </motion.div>
+    </motion.main>
   );
 };
 

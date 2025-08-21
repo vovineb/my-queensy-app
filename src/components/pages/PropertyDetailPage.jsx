@@ -4,32 +4,33 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { MapPin, Users, Bed, Bath, Star, ArrowLeft, Calendar, Phone, Mail } from 'lucide-react';
 import BookingModal from '../booking/BookingModal';
-import cImage from '../../assets/images/c.jpg';
-import c2Image from '../../assets/images/c2.jpg';
-import c3Image from '../../assets/images/c3.jpg';
-import c4Image from '../../assets/images/c4.jpg';
-import c5Image from '../../assets/images/c5.jpg';
-import c6Image from '../../assets/images/c6.jpg';
-import c7Image from '../../assets/images/c7.jpg';
-import c8Image from '../../assets/images/c8.jpg';
-import dImage from '../../assets/images/d.jpg';
-import d1Image from '../../assets/images/d1.jpg';
-import d2Image from '../../assets/images/d2.jpg';
-import d3Image from '../../assets/images/d3.jpg';
-import d4Image from '../../assets/images/d4.jpg';
-import d5Image from '../../assets/images/d5.jpg';
-import d6Image from '../../assets/images/d6.jpg';
-import d7Image from '../../assets/images/d7.jpg';
-import qImage from '../../assets/images/q.jpg';
-import q1Image from '../../assets/images/q1.jpg';
-import q2Image from '../../assets/images/q2.jpg';
-import q3Image from '../../assets/images/q3.jpg';
-import q4Image from '../../assets/images/q4.jpg';
-import q5Image from '../../assets/images/q5.jpg';
-import q6Image from '../../assets/images/q6.jpg';
-import q7Image from '../../assets/images/q7.jpg';
-import q8Image from '../../assets/images/q8.jpg';
-import q9Image from '../../assets/images/q9.jpg';
+// Using images from public directory
+const cImage = '/images/c.jpg';
+const c2Image = '/images/c2.jpg';
+const c3Image = '/images/c3.jpg';
+const c4Image = '/images/c4.jpg';
+const c5Image = '/images/c5.jpg';
+const c6Image = '/images/c6.jpg';
+const c7Image = '/images/c7.jpg';
+const c8Image = '/images/c8.jpg';
+const dImage = '/images/d.jpg';
+const d1Image = '/images/d1.jpg';
+const d2Image = '/images/d2.jpg';
+const d3Image = '/images/d3.jpg';
+const d4Image = '/images/d4.jpg';
+const d5Image = '/images/d5.jpg';
+const d6Image = '/images/d6.jpg';
+const d7Image = '/images/d7.jpg';
+const qImage = '/images/q.jpg';
+const q1Image = '/images/q1.jpg';
+const q2Image = '/images/q2.jpg';
+const q3Image = '/images/q3.jpg';
+const q4Image = '/images/q4.jpg';
+const q5Image = '/images/q5.jpg';
+const q6Image = '/images/q6.jpg';
+const q7Image = '/images/q7.jpg';
+const q8Image = '/images/q8.jpg';
+const q9Image = '/images/q9.jpg';
 
 const PropertyDetailPage = () => {
   const { id } = useParams();
@@ -149,135 +150,144 @@ const PropertyDetailPage = () => {
   }
 
   return (
-    <div className={`min-h-screen pt-20 ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+    <main className="min-h-screen pt-16 sm:pt-20 bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* Navigation */}
-      <div className="container mx-auto px-6 py-6">
+      <nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6" aria-label="Property navigation">
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-blue-500 hover:text-blue-600 transition-colors mb-6"
+          className="flex items-center gap-2 text-[var(--vintage-sage)] hover:text-[var(--vintage-brown)] transition-colors mb-4 sm:mb-6"
+          aria-label="Back to properties"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5" aria-hidden="true" />
           Back
         </motion.button>
-      </div>
+      </nav>
 
-      <div className="container mx-auto px-6 pb-20">
+      <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" role="region" aria-label="Property details content">
         {/* Property Header */}
-        <motion.div
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h1 className="text-4xl md:text-6xl font-bold font-playfair mb-4 text-blue-600">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold font-playfair mb-4 text-[var(--vintage-sage)] font-sans" id="property-title">
             {property.title}
           </h1>
-          <p className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className="text-base sm:text-xl max-w-3xl mx-auto text-[var(--text-secondary)]">
             {property.fullDescription}
           </p>
-        </motion.div>
+        </motion.header>
 
-                    {/* Image Gallery */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-16"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Main Image with Auto-scroll */}
-                <div className="space-y-4">
-                  <div className="aspect-[4/3] rounded-3xl overflow-hidden relative">
-                    <img
-                      src={property.images[selectedImage]}
-                      alt={`${property.title} - Image ${selectedImage + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    
-                    {/* Auto-scroll indicator */}
-                    <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
-                      Auto-scroll: {selectedImage + 1}/{property.images.length}
-                    </div>
-                  </div>
-                  
-                  {/* Thumbnail Grid */}
-                  <div className="grid grid-cols-4 gap-2">
-                    {property.images.map((image, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedImage(index)}
-                        className={`aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
-                          selectedImage === index 
-                            ? 'ring-4 ring-blue-500 scale-105' 
-                            : 'hover:scale-105'
-                        }`}
-                      >
-                        <img
-                          src={image}
-                          alt={`${property.title} - Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-            {/* Property Details */}
-            <div className="space-y-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-3xl">
-                <h3 className="text-2xl font-bold text-blue-800 mb-4">Property Highlights</h3>
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="flex items-center gap-3">
-                    <Bed className="w-6 h-6 text-blue-600" />
-                    <span className="text-blue-700">{property.bedrooms} Bedroom{property.bedrooms > 1 ? 's' : ''}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Bath className="w-6 h-6 text-blue-600" />
-                    <span className="text-blue-700">{property.bathrooms} Bath{property.bathrooms > 1 ? 's' : ''}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Users className="w-6 h-6 text-blue-600" />
-                    <span className="text-blue-700">Up to {property.maxGuests} Guests</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-6 h-6 text-blue-600" />
-                    <span className="text-blue-700">{property.location}</span>
-                  </div>
-                </div>
+        {/* Image Gallery */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-8 sm:mb-16"
+          aria-labelledby="image-gallery-heading"
+        >
+          <h2 id="image-gallery-heading" className="sr-only">Property Image Gallery</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Main Image with Auto-scroll - Takes 3/4 of left side */}
+            <figure className="lg:col-span-2 space-y-4">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden relative">
+                <img
+                  src={property.images[selectedImage]}
+                  alt={`${property.title} - Image ${selectedImage + 1}`}
+                  className="w-full h-full object-cover"
+                />
                 
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-800 mb-2">
-                    KES {property.originalPrice.toLocaleString()}/night
-                  </div>
-                  <button
-                    onClick={() => setShowBookingModal(true)}
-                    className="inline-flex items-center justify-center whitespace-nowrap w-full min-h-[56px] px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold rounded-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
-                  >
-                    Book Now
-                  </button>
+                {/* Auto-scroll indicator */}
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+                  Auto-scroll: {selectedImage + 1}/{property.images.length}
                 </div>
               </div>
-            </div>
+              
+              {/* Thumbnail Grid */}
+              <figcaption className="grid grid-cols-4 gap-2">
+                {property.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
+                      selectedImage === index 
+                        ? 'ring-4 ring-[var(--vintage-sage)] scale-105' 
+                        : 'hover:scale-105'
+                    }`}
+                    aria-label={`View image ${index + 1} of ${property.images.length}`}
+                    aria-pressed={selectedImage === index}
+                  >
+                    <img
+                      src={image}
+                      alt={`${property.title} - Thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </figcaption>
+            </figure>
+
+            {/* Property Details - Takes remaining 1/4 */}
+            <section className="lg:col-span-1 space-y-4" aria-labelledby="property-details-heading">
+              <div className="bg-[var(--vintage-cream)] p-6 rounded-2xl border border-[var(--vintage-sage)]/20 shadow-lg">
+                <h2 id="property-details-heading" className="text-xl font-bold text-[var(--vintage-brown)] mb-4">Property Highlights</h2>
+                <dl className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Bed className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
+                    <dt className="sr-only">Bedrooms</dt>
+                    <dd className="text-[var(--vintage-brown)] font-medium">{property.bedrooms} Bedroom{property.bedrooms > 1 ? 's' : ''}</dd>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Bath className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
+                    <dt className="sr-only">Bathrooms</dt>
+                    <dd className="text-[var(--vintage-brown)] font-medium">{property.bathrooms} Bath{property.bathrooms > 1 ? 's' : ''}</dd>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
+                    <dt className="sr-only">Maximum Guests</dt>
+                    <dd className="text-[var(--vintage-brown)] font-medium">Up to {property.maxGuests} Guests</dd>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
+                    <dt className="sr-only">Location</dt>
+                    <dd className="text-[var(--vintage-brown)] font-medium">{property.location}</dd>
+                  </div>
+                </dl>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-2xl font-bold text-[var(--vintage-sage)] mb-2">
+                  KES {property.originalPrice.toLocaleString()}/night
+                </div>
+                <button
+                  onClick={() => setShowBookingModal(true)}
+                  className="inline-flex items-center justify-center whitespace-nowrap w-full min-h-[52px] px-7 py-4 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-semibold rounded-xl hover:bg-[var(--vintage-brown)] transition-all duration-200 transform hover:scale-105 shadow-md"
+                >
+                  Book Now
+                </button>
+              </div>
+            </section>
           </div>
-        </motion.div>
+        </motion.section>
 
         {/* Description + Map Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
         >
           {/* Glassy Description Block */}
-          <div className={`${isDark ? 'bg-navy-800/80' : 'bg-white/80'} backdrop-blur-md rounded-3xl p-8 border ${isDark ? 'border-navy-700/40' : 'border-white/30'} shadow-2xl`}>
-            <h3 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>About this place</h3>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} text-lg leading-relaxed`}>{property.fullDescription}</p>
+          <div className="bg-[var(--vintage-cream)] backdrop-blur-md rounded-3xl p-8 border border-[var(--vintage-sage)]/20 shadow-2xl">
+            <h3 className="text-2xl font-bold mb-4 text-[var(--vintage-brown)]">About this place</h3>
+            <p className="text-[var(--vintage-brown)] text-lg leading-relaxed">{property.fullDescription}</p>
           </div>
 
           {/* Google Maps Embed */}
-          <div className={`${isDark ? 'bg-navy-800/80' : 'bg-white/80'} backdrop-blur-md rounded-3xl p-4 border ${isDark ? 'border-navy-700/40' : 'border-white/30'} shadow-2xl`}> 
-            <h3 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>Location</h3>
+          <div className="bg-[var(--vintage-cream)] backdrop-blur-md rounded-3xl p-8 border border-[var(--vintage-sage)]/20 shadow-2xl"> 
+            <h3 className="text-2xl font-bold mb-4 text-[var(--vintage-brown)]">Location</h3>
             <div className="rounded-2xl overflow-hidden">
               {property.location ? (
                 <iframe
@@ -290,7 +300,7 @@ const PropertyDetailPage = () => {
                 />
               ) : (
                 <div className="p-6 text-center">
-                  <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Location unavailable</p>
+                  <p className="text-[var(--vintage-brown)]">Location unavailable</p>
                   <iframe
                     title="Default map"
                     src={`https://www.google.com/maps?q=${encodeURIComponent('Diani Beach, Kenya')}&output=embed`}
@@ -305,59 +315,62 @@ const PropertyDetailPage = () => {
         </motion.div>
 
         {/* Amenities & Features */}
-        <motion.div
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+          aria-labelledby="amenities-features-heading"
         >
-          <div className={`${isDark ? 'bg-navy-800/80' : 'bg-white/80'} backdrop-blur-md rounded-3xl p-8 border ${isDark ? 'border-navy-700/40' : 'border-white/30'} shadow-2xl`}>
-            <h3 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-800'}`}>Amenities</h3>
-            <div className="grid grid-cols-2 gap-3">
+          <h2 id="amenities-features-heading" className="sr-only">Amenities and Features</h2>
+          <div className="bg-[var(--vintage-cream)] backdrop-blur-md rounded-3xl p-8 border border-[var(--vintage-sage)]/20 shadow-2xl">
+            <h3 id="amenities-heading" className="text-2xl font-bold mb-6 text-[var(--vintage-brown)]">Amenities</h3>
+            <ul className="grid grid-cols-2 gap-3" aria-labelledby="amenities-heading">
               {property.amenities.map((amenity, index) => (
-                <div key={index} className={`flex items-center gap-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <li key={index} className="flex items-center gap-2 text-[var(--vintage-brown)]">
+                  <div className="w-2 h-2 bg-[var(--vintage-sage)] rounded-full" aria-hidden="true"></div>
                   {amenity}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
           
-          <div className={`${isDark ? 'bg-navy-800/80' : 'bg-white/80'} backdrop-blur-md rounded-3xl p-8 border ${isDark ? 'border-navy-700/40' : 'border-white/30'} shadow-2xl`}>
-            <h3 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-800'}`}>Features</h3>
-            <div className="space-y-3">
+          <div className="bg-[var(--vintage-cream)] backdrop-blur-md rounded-3xl p-8 border border-[var(--vintage-sage)]/20 shadow-2xl">
+            <h3 id="features-heading" className="text-2xl font-bold mb-6 text-[var(--vintage-brown)]">Features</h3>
+            <ul className="space-y-3" aria-labelledby="features-heading">
               {property.features.map((feature, index) => (
-                <div key={index} className={`flex items-start gap-3 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <li key={index} className="flex items-start gap-3 text-[var(--vintage-brown)]">
+                  <div className="w-2 h-2 bg-[var(--vintage-sage)] rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                   {feature}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </motion.div>
+        </motion.section>
 
         {/* Contact Section */}
-        <motion.div
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-8 text-center text-white"
+          aria-labelledby="contact-heading"
         >
-          <h3 className="text-2xl font-bold mb-4">Ready to Book Your Stay?</h3>
+          <h2 id="contact-heading" className="text-2xl font-bold mb-4">Ready to Book Your Stay?</h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
             Contact us today to secure your dates and start planning your dream vacation in Diani Beach
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-white text-blue-600 font-bold rounded-2xl hover:bg-gray-100 transition-colors">
-              <Phone className="w-5 h-5 inline mr-2" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Contact options">
+            <button className="px-8 py-4 bg-white text-blue-600 font-bold rounded-2xl hover:bg-gray-100 transition-colors" aria-label="Call to book your stay">
+              <Phone className="w-5 h-5 inline mr-2" aria-hidden="true" />
               Call Now
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white font-bold rounded-2xl hover:bg-white hover:text-blue-600 transition-colors">
-              <Mail className="w-5 h-5 inline mr-2" />
+            <button className="px-8 py-4 border-2 border-white text-white font-bold rounded-2xl hover:bg-white hover:text-blue-600 transition-colors" aria-label="Email to book your stay">
+              <Mail className="w-5 h-5 inline mr-2" aria-hidden="true" />
               Send Email
             </button>
           </div>
-        </motion.div>
+        </motion.section>
       </div>
 
       {/* Booking Modal */}
@@ -373,7 +386,7 @@ const PropertyDetailPage = () => {
           originalPrice: property.originalPrice
         }}
       />
-    </div>
+    </main>
   );
 };
 
