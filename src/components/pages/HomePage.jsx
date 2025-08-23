@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import { Star, MapPin, Users, Bed, Bath, Wifi, Shield, Coffee, Umbrella, TreePine, Code, Calculator, FileText, Monitor, Palette, Settings } from 'lucide-react';
 import HeroSection from '../common/HeroSection';
 // Using images from public directory
+const wImage = '/images/w.jpg';
+const q9Image = '/images/q9.jpg';
 const cImage = '/images/c.jpg';
-const c2Image = '/images/c2.jpg';
-const c3Image = '/images/c3.jpg';
 const dImage = '/images/d.jpg';
 const d1Image = '/images/d1.jpg';
-const d2Image = '/images/d2.jpg';
+const w1Image = '/images/w1.jpg';
 const qImage = '/images/q.jpg';
 const q1Image = '/images/q1.jpg';
 const q2Image = '/images/q2.jpg';
+const w2Image = '/images/w2.jpg';
 import CountUp from 'react-countup';
 
 const HomePage = () => {
@@ -86,7 +87,7 @@ const HomePage = () => {
       <HeroSection />
 
       {/* Properties Preview Section */}
-      <section aria-labelledby="properties-heading" className="py-24 section-vintage-cream section-transition">
+      <section aria-labelledby="properties-heading" className="py-16 sm:py-24 section-vintage-cream section-transition">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -103,7 +104,7 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20" role="list" aria-label="Featured properties">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-20 mt-8 sm:mt-12 px-4 sm:px-0" role="list" aria-label="Featured properties">
             {/* Chameleon 1 */}
             <motion.article
               initial={{ opacity: 0, y: 20 }}
@@ -111,7 +112,7 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-sage)]/30 mx-2 sm:mx-0 sm:p-4"
               role="listitem"
             >
               <div className="relative h-64 sm:h-72 overflow-hidden">
@@ -134,8 +135,8 @@ const HomePage = () => {
                   </div>
                 </div>
                 <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Cozy 1-bedroom unit perfect for couples or solo travelers seeking comfort and luxury.</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 5,500</span>
+                <div className="flex items-center justify-between mt-6">
+                  <span className="text-2xl font-bold text-[var(--vintage-brown)]">KES 5,500</span>
                   <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
@@ -150,7 +151,7 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-sage)]/30 mx-2 sm:mx-0 sm:p-4"
               role="listitem"
             >
               <div className="relative h-64 sm:h-72 overflow-hidden">
@@ -173,8 +174,8 @@ const HomePage = () => {
                   </div>
                 </div>
                 <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Charming 1-bedroom accommodation with direct beach access and stunning ocean views.</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 5,500</span>
+                <div className="flex items-center justify-between mt-6">
+                  <span className="text-2xl font-bold text-[var(--vintage-brown)]">KES 5,500</span>
                   <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
@@ -189,7 +190,7 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-[var(--card-bg)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-cream)]/20 mx-2 sm:mx-0"
+              className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-sage)]/30 mx-2 sm:mx-0 sm:p-4"
               role="listitem"
             >
               <div className="relative h-64 sm:h-72 overflow-hidden">
@@ -212,8 +213,47 @@ const HomePage = () => {
                   </div>
                 </div>
                 <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Luxurious 3-bedroom penthouse with panoramic coastal views and premium amenities.</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-[var(--vintage-sage)]">KES 15,500</span>
+                <div className="flex items-center justify-between mt-6">
+                  <span className="text-2xl font-bold text-[var(--vintage-brown)]">KES 15,500</span>
+                  <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    View Properties
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
+
+            {/* New Watamu Villa */}
+            <motion.article
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-[var(--vintage-sage)]/30 mx-2 sm:mx-0 sm:p-4"
+              role="listitem"
+            >
+              <div className="relative h-64 sm:h-72 overflow-hidden">
+                <img src={wImage} alt="New Watamu Villa" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-[var(--vintage-dark)]/40" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">New Watamu Villa</h3>
+                  <p className="text-[var(--vintage-cream)] text-lg">Luxury Villa</p>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3">
+                    <Bed className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">4 Bedrooms</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Bath className="w-6 h-6 text-[var(--vintage-sage)]" />
+                    <span className="text-[var(--vintage-brown)] font-medium text-base">3 Baths</span>
+                  </div>
+                </div>
+                <p className="text-[var(--text-secondary)] text-base mb-6 font-medium leading-relaxed">Beautiful villa with 4 bedrooms and 3 bathrooms, perfect for large groups or families.</p>
+                <div className="flex items-center justify-between mt-6">
+                  <span className="text-2xl font-bold text-[var(--vintage-brown)]">KES 20,000</span>
                   <Link to="/properties" className="btn btn-medium text-sm font-semibold px-6 py-3 bg-[var(--vintage-sage)] border border-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] hover:border-[var(--vintage-brown)] hover:text-[var(--tech-white)] rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                     View Properties
                   </Link>
@@ -222,10 +262,10 @@ const HomePage = () => {
             </motion.article>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 mb-12">
             <Link
               to="/properties"
-              className="btn btn-medium px-9 py-5 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-bold text-lg rounded-2xl hover:bg-[var(--vintage-brown)] hover:text-[var(--tech-white)] transition-all duration-300 transform hover:scale-105 shadow-xl border-none"
+              className="btn btn-medium px-9 py-5 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-bold text-lg rounded-2xl hover:bg-[var(--vintage-brown)] hover:text-[var(--tech-white)] transition-all duration-300 transform hover:scale-105 shadow-xl border-none inline-block"
             >
               View All Properties
             </Link>

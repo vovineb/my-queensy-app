@@ -20,7 +20,7 @@ const PropertyCard = ({ property, isReturningCustomer = false }) => {
       <Card
         variant="default"
         padding="none"
-        className="group overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl bg-[var(--card-bg)] border-none rounded-3xl min-h-[528px] w-[110%] mx-[-5%]"
+        className="group overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl bg-[var(--vintage-cream)]/80 backdrop-blur-md border border-[var(--vintage-sage)]/30 rounded-3xl min-h-[600px] w-full mx-0 p-[5%]"
       >
         {/* Enhanced Image Container - 3/4 of card height */}
         <div className="relative h-80 overflow-hidden rounded-t-3xl">
@@ -35,9 +35,9 @@ const PropertyCard = ({ property, isReturningCustomer = false }) => {
           
           {/* Enhanced Price Tag */}
           <div className="absolute top-3 right-3">
-            <div className="px-3 py-2 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-semibold rounded-xl shadow-lg backdrop-blur-sm border border-[var(--vintage-cream)]/20 text-sm">
-              KES {property.price.toLocaleString()}/night
-            </div>
+            <div className="px-3 py-2 bg-[var(--vintage-brown)] text-[var(--tech-white)] font-semibold rounded-xl shadow-lg backdrop-blur-sm border border-[var(--vintage-cream)]/20 text-sm">
+                          KES {property.price.toLocaleString()}/night
+                        </div>
           </div>
           
           {/* Enhanced Badge */}
@@ -102,7 +102,7 @@ const PropertyCard = ({ property, isReturningCustomer = false }) => {
               size="medium"
               className="flex-1 font-sans bg-transparent hover:bg-[var(--vintage-sage)] text-[var(--vintage-sage)] hover:text-[var(--tech-white)] font-semibold py-4 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 border border-[var(--vintage-sage)] text-base"
             >
-              Details
+              View Details
             </Button>
           </div>
         </div>

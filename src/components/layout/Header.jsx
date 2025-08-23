@@ -2,14 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
 import ThemeToggle from '../common/ThemeToggle';
+import { auth } from '../../config/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Header = ({ isDark, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [user, setUser] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,17 +48,13 @@ const Header = ({ isDark, toggleTheme }) => {
   };
 
   return (
-    <header className={`w-full fixed top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-[var(--vintage-dark)]/95 backdrop-blur-md shadow-lg border-b border-[var(--vintage-sage)]/30'
-        : 'bg-[var(--vintage-dark)]/80 backdrop-blur-sm'
-    }`}>
-      <div className="container mx-auto px-4 sm:px-6">
+    <header className="fixed top-0 left-0 right-0 bg-[var(--vintage-cream)]/95 backdrop-blur-sm z-50 shadow-sm">
+      <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <Link to="/" className="text-xl sm:text-2xl font-bold font-playfair transition-colors font-sans text-[var(--vintage-sage)]">
-            Queensy
-          </Link>
+          <Link to="/" className="text-xl sm:text-2xl font-bold font-playfair transition-colors font-sans text-[var(--vintage-brown)] drop-shadow-[0_0_8px_var(--vintage-brown)] animate-pulse-slow">
+                      Queensy
+                    </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
@@ -58,24 +65,54 @@ const Header = ({ isDark, toggleTheme }) => {
               { path: '/about', label: 'About' },
               { path: '/contact', label: 'Contact' }
             ].map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-8 py-4 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 ${
-                  location.pathname === item.path
-                    ? 'bg-[var(--vintage-sage)] text-[var(--tech-white)] shadow-2xl'
-                    : 'text-[var(--vintage-brown)] hover:text-[var(--tech-white)] hover:bg-[var(--vintage-brown)]'
-                }`}
-                style={{
-                  boxShadow: location.pathname === item.path 
-                    ? isDark 
-                      ? '0 8px 32px rgba(2, 132, 199, 0.4)' 
-                      : '0 8px 32px rgba(2, 132, 199, 0.3)'
-                    : 'none'
-                }}
-              >
-                {item.label}
-              </Link>
+              <div key={item.path} className="relative group">
+                <Link
+                  to={item.path}
+                  className={`px-8 py-4 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:mx-2 hover:my-1 ${
+                    location.pathname === item.path
+                      ? 'bg-[var(--vintage-sage)] text-[var(--tech-white)] shadow-2xl'
+                      : 'text-[var(--vintage-brown)] hover:text-[var(--tech-white)] hover:bg-[var(--vintage-brown)]'
+                  }`}
+                  style={{
+                    boxShadow: location.pathname === item.path
+                      ? isDark
+                        ? '0 8px 32px rgba(2, 132, 199, 0.4)'
+                        : '0 8px 32px rgba(2, 132, 199, 0.3)'
+                      : 'none'
+                  }}
+                >
+                  {item.label}
+                </Link>
+                {/* Properties Dropdown */}
+                {item.path === '/properties' && (
+                  <div className="absolute left-0 mt-2 w-64 bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-[var(--vintage-sage)]/30">
+                    <Link
+                      to="/properties/chameleon-1"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      Chameleon 1 – 1 Bedroom
+                    </Link>
+                    <Link
+                      to="/properties/chameleon-2"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      Chameleon 2 – 1 Bedroom
+                    </Link>
+                    <Link
+                      to="/properties/wendys-penthouse"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      W. Penthouse – 3 Bedroom
+                    </Link>
+                    <Link
+                      to="/properties/watamu-villa"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      Watamu Villa – 4 Bedroom
+                    </Link>
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
@@ -85,23 +122,76 @@ const Header = ({ isDark, toggleTheme }) => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 bg-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] shadow-lg"
+                className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 bg-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] shadow-lg"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4" />
               </button>
 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 lg:hidden bg-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] shadow-lg"
+                className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-105 lg:hidden bg-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] shadow-lg"
               >
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
 
+            {/* Profile Button */}
+            <div className="hidden lg:flex items-center gap-4">
+              {user ? (
+                <div className="relative group">
+                  {/* User Icon/Avatar */}
+                  <div className="w-10 h-10 rounded-full bg-[var(--vintage-sage)] flex items-center justify-center text-[var(--tech-white)] font-bold cursor-pointer">
+                    {user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-48 bg-[var(--vintage-cream)] rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-[var(--vintage-sage)]/30 backdrop-blur-md">
+                                      <Link
+                                        to="/bookings"
+                                        className="block px-4 py-3 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 font-medium rounded-t-xl"
+                                      >
+                                        My Bookings
+                                      </Link>
+                                      <button
+                                        onClick={() => auth.signOut()}
+                                        className="block w-full text-left px-4 py-3 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 font-medium rounded-b-xl"
+                                      >
+                                        Sign Out
+                                      </button>
+                                    </div>
+                </div>
+              ) : (
+                <div className="relative group">
+                  {/* Profile Icon */}
+                  <div className="w-10 h-10 rounded-full bg-[var(--vintage-sage)] flex items-center justify-center text-[var(--tech-white)] font-bold cursor-pointer">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-48 bg-[var(--vintage-cream)] rounded-xl shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-[var(--vintage-sage)]/30 backdrop-blur-md">
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="block px-4 py-2 text-[var(--vintage-brown)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Theme Toggle */}
-            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+            <div className="w-10 h-10 sm:w-12 sm:h-12">
+              <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+            </div>
           </div>
         </div>
 
@@ -150,6 +240,46 @@ const Header = ({ isDark, toggleTheme }) => {
                   {item.label}
                 </Link>
               ))}
+              {/* Mobile Profile Options */}
+              {user && (
+                              <Link
+                                to="/bookings"
+                                className="py-3 px-6 bg-[var(--vintage-cream)] text-[var(--vintage-brown)] font-semibold rounded-xl hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 text-center mb-3"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                My Bookings
+                              </Link>
+                            )}
+              <div className="flex flex-col gap-4 px-6 py-4 border-t border-[var(--vintage-sage)]/30 mt-4">
+                {user ? (
+                  <button
+                    onClick={() => {
+                      auth.signOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="py-3 px-6 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-semibold rounded-xl hover:bg-[var(--vintage-brown)] transition-all duration-300 text-center"
+                  >
+                    Sign Out
+                  </button>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="py-3 px-6 bg-[var(--vintage-cream)] text-[var(--vintage-brown)] font-semibold rounded-xl hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] transition-all duration-300 text-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="py-3 px-6 bg-[var(--vintage-sage)] text-[var(--tech-white)] font-semibold rounded-xl hover:bg-[var(--vintage-brown)] transition-all duration-300 text-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </nav>
         )}

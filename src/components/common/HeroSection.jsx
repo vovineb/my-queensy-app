@@ -10,12 +10,15 @@ const HeroSection = () => {
   const [typed, setTyped] = useState('');
 
   const heroImages = [
+    { src: '/images/w.jpg', name: 'New Villa', location: 'Watamu' },
+    { src: '/images/q9.jpg', name: 'Premium Villa', location: 'Diani Beach' },
     { src: '/images/c.jpg', name: 'Luxury Villa', location: 'Diani Beach' },
-    { src: '/images/c2.jpg', name: 'Beach House', location: 'Diani Beach' },
-    { src: '/images/c3.jpg', name: 'Coastal Retreat', location: 'Diani Beach' },
-    { src: '/images/c4.jpg', name: 'Premium Suite', location: 'Diani Beach' },
-    { src: '/images/c5.jpg', name: 'Ocean View', location: 'Diani Beach' },
-    { src: '/images/c6.jpg', name: 'Garden Villa', location: 'Diani Beach' }
+    { src: '/images/d.jpg', name: 'Beach Villa', location: 'Diani Beach' },
+    { src: '/images/w1.jpg', name: 'New Villa', location: 'Watamu' },
+    { src: '/images/w3.jpg', name: 'Watamu Villa', location: 'Watamu' },
+    { src: '/images/q1.jpg', name: 'Queen Villa', location: 'Diani Beach' },
+    { src: '/images/q2.jpg', name: 'Queen Suite', location: 'Diani Beach' },
+    { src: '/images/w2.jpg', name: 'New Villa', location: 'Watamu' }
   ];
 
   const introCards = [
@@ -128,33 +131,11 @@ const HeroSection = () => {
     <section className="relative min-h-screen bg-[var(--bg-primary)] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16">
         {/* Desktop Layout */}
-        <div className="hidden lg:flex items-center gap-6 lg:gap-8 min-h-[75vh]">
+        <div className="hidden lg:flex items-center gap-6 lg:gap-8 min-h-[85vh]">
           {/* Image Carousel Container */}
           <div className="lg:w-4/5 w-full order-1">
-            <motion.div
-              key={currentImageIndex}
-              initial={{ 
-                opacity: 0, 
-                x: animationDirection === 'right' ? 100 : -100,
-                scale: 0.98
-              }}
-              animate={{ 
-                opacity: 1, 
-                x: 0,
-                scale: 1
-              }}
-              exit={{ 
-                opacity: 0, 
-                x: animationDirection === 'right' ? -100 : 100,
-                scale: 0.98
-              }}
-              transition={{ 
-                duration: 0.4,
-                type: "spring",
-                stiffness: 150,
-                damping: 25
-              }}
-              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-[var(--card-bg)] border border-[var(--card-border)]"
+            <div
+              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-[var(--card-bg)] border border-[var(--card-border)] backdrop-blur-md bg-[var(--vintage-cream)]/30"
               style={{
                 background: 'linear-gradient(135deg, var(--vintage-cream) 0%, var(--vintage-sage) 100%)'
               }}
@@ -189,16 +170,16 @@ const HeroSection = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.5 }}
                   >
-                    <div className="bg-[var(--vintage-cream)]/95 backdrop-blur-sm rounded-xl p-4 shadow-xl">
-                      <h3 className="text-lg font-bold text-[var(--tech-black)] mb-1">
+                    <div className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-xl p-3 shadow-xl border border-[var(--vintage-sage)]/30">
+                      <h3 className="text-base font-bold text-[var(--vintage-brown)] mb-1">
                         {heroImages[currentImageIndex].name}
                       </h3>
-                      <p className="text-[var(--vintage-brown)] text-sm mb-2">
+                      <p className="text-[var(--vintage-brown)] text-xs mb-2">
                         {heroImages[currentImageIndex].location}
                       </p>
                       <div className="flex items-center gap-2">
-                        <Star className="w-4 h-4 text-[var(--vintage-sage)] fill-current" />
-                        <span className="text-[var(--tech-black)] text-sm font-medium">Premium</span>
+                        <Star className="w-3 h-3 text-[var(--vintage-sage)] fill-current" />
+                        <span className="text-[var(--vintage-brown)] text-xs font-medium">Premium</span>
                       </div>
                     </div>
                   </motion.div>
@@ -243,7 +224,7 @@ const HeroSection = () => {
               >
                 <ChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
               </button>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Content - Text and Buttons */}
@@ -270,7 +251,7 @@ const HeroSection = () => {
                 stiffness: 80,
                 damping: 20
               }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--vintage-sage)] mb-3 leading-tight font-display"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--vintage-sage)] mb-3 leading-tight font-display mt-4"
             >
               Queensy
             </motion.h1>
@@ -286,7 +267,7 @@ const HeroSection = () => {
                 stiffness: 70,
                 damping: 20
               }}
-              className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] mb-2 sm:mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
             >
               Discover luxury accommodations in Australia's most stunning destinations
             </motion.p>
@@ -302,12 +283,12 @@ const HeroSection = () => {
                 stiffness: 60,
                 damping: 20
               }}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[var(--vintage-brown)] mb-4 h-10 flex items-center justify-center lg:justify-start"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-[var(--vintage-brown)] mb-2 h-10 flex items-center justify-center lg:justify-start w-full max-w-2xl"
               role="status"
               aria-live="polite"
               aria-label="Dynamic promotional text"
             >
-              <span className="typing-text">{typed}</span>
+              <span className="typing-text w-full text-center lg:text-left">{typed}</span>
               <span className="typing-cursor">|</span>
             </motion.div>
 
@@ -437,7 +418,7 @@ const HeroSection = () => {
                 stiffness: 70,
                 damping: 20
               }}
-              className="text-base sm:text-lg text-[var(--text-secondary)] mb-4 max-w-xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-[var(--text-secondary)] mb-2 max-w-xl mx-auto leading-relaxed"
             >
               Discover luxury accommodations in Australia's most stunning destinations
             </motion.p>
@@ -453,12 +434,12 @@ const HeroSection = () => {
                 stiffness: 60,
                 damping: 20
               }}
-              className="text-lg sm:text-xl font-medium text-[var(--vintage-brown)] mb-4 min-h-[2rem] flex items-center justify-center"
+              className="text-lg sm:text-xl font-medium text-[var(--vintage-brown)] mb-2 min-h-[2rem] flex items-center justify-center w-full max-w-2xl"
               role="status"
               aria-live="polite"
               aria-label="Dynamic promotional text"
             >
-              <span className="font-mono text-[var(--vintage-brown)]">
+              <span className="font-mono text-[var(--vintage-brown)] w-full text-center">
                 {typed}
               </span>
               <span className="animate-pulse text-[var(--vintage-brown)] ml-1" aria-hidden="true">|</span>
@@ -477,7 +458,7 @@ const HeroSection = () => {
                 stiffness: 60,
                 damping: 20
               }}
-              className="relative w-full h-full min-h-[400px] overflow-hidden rounded-2xl shadow-2xl group"
+              className="relative w-full h-full min-h-[320px] overflow-hidden rounded-2xl shadow-2xl group backdrop-blur-md bg-[var(--vintage-cream)]/30"
               style={{
                 background: 'linear-gradient(135deg, var(--vintage-cream) 0%, var(--vintage-sage) 100%)'
               }}
@@ -512,16 +493,16 @@ const HeroSection = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.5 }}
                   >
-                    <div className="bg-[var(--vintage-cream)]/95 backdrop-blur-sm rounded-xl p-4 shadow-xl">
-                      <h3 className="text-lg font-bold text-[var(--tech-black)] mb-1">
+                    <div className="bg-[var(--vintage-cream)]/80 backdrop-blur-md rounded-xl p-3 shadow-xl border border-[var(--vintage-sage)]/30">
+                      <h3 className="text-base font-bold text-[var(--vintage-brown)] mb-1">
                         {heroImages[currentImageIndex].name}
                       </h3>
-                      <p className="text-[var(--vintage-brown)] text-sm mb-2">
+                      <p className="text-[var(--vintage-brown)] text-xs mb-2">
                         {heroImages[currentImageIndex].location}
                       </p>
                       <div className="flex items-center gap-2">
-                        <Star className="w-4 h-4 text-[var(--vintage-sage)] fill-current" />
-                        <span className="text-[var(--tech-black)] text-sm font-medium">Premium</span>
+                        <Star className="w-3 h-3 text-[var(--vintage-sage)] fill-current" />
+                        <span className="text-[var(--vintage-brown)] text-xs font-medium">Premium</span>
                       </div>
                     </div>
                   </motion.div>
@@ -594,8 +575,8 @@ const HeroSection = () => {
                 aria-label="Contact us for booking inquiries"
               >
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[var(--vintage-sage)] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-4 h-4 text-[var(--tech-white)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-8 h-8 bg-[var(--vintage-sage)] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-4 h-4 text-[var(--tech-white)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -623,8 +604,8 @@ const HeroSection = () => {
                 aria-label="Browse available properties"
               >
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[var(--vintage-brown)] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-4 h-4 text-[var(--tech-white)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-8 h-8 bg-[var(--vintage-brown)] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-4 h-4 text-[var(--tech-white)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                   </div>

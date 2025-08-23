@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Lock, Check, AlertCircle } from 'lucide-react';
+import { Mail, Lock, AlertCircle } from 'lucide-react';
 import { auth } from '../../config/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInAnonymously } from 'firebase/auth';
 
-const SignUpPage = () => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    password: '',
-    confirmPassword: ''
+    password: ''
   });
-
+  
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -34,14 +27,8 @@ const SignUpPage = () => {
     
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
     }
     
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -55,14 +42,24 @@ const SignUpPage = () => {
     setAuthError('');
     
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      await updateProfile(userCredential.user, { displayName: formData.name });
-      setIsSuccess(true);
-      setTimeout(() => {
-        navigate('/'); // Redirect to home page after successful signup
-      }, 2000);
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      navigate('/'); // Redirect to home page after successful login
     } catch (error) {
-      setAuthError('Failed to create account. Please try again.');
+      setAuthError('Invalid email or password. Please try again.');
+    }
+    
+    setIsSubmitting(false);
+  };
+
+  const handleAnonymousLogin = async () => {
+    setIsSubmitting(true);
+    setAuthError('');
+    
+    try {
+      await signInAnonymously(auth);
+      navigate('/'); // Redirect to home page after successful login
+    } catch (error) {
+      setAuthError('Failed to sign in anonymously. Please try again.');
     }
     
     setIsSubmitting(false);
@@ -80,33 +77,11 @@ const SignUpPage = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--tech-white)] mb-2">Create Account</h1>
-          <p className="text-[var(--vintage-cream)]">Join us today</p>
+          <h1 className="text-3xl font-bold text-[var(--tech-white)] mb-2">Welcome Back</h1>
+          <p className="text-[var(--vintage-cream)]">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Field */}
-          <div>
-            <label htmlFor="name" className={labelClasses}>
-              <User className="w-4 h-4" />
-              <span>Full Name</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className={inputClasses}
-              placeholder="John Doe"
-            />
-            {errors.name && (
-              <p className="mt-1 text-[var(--tech-white)] text-sm flex items-center gap-1">
-                <AlertCircle className="w-4 h-4" />
-                {errors.name}
-              </p>
-            )}
-          </div>
-
           {/* Email Field */}
           <div>
             <label htmlFor="email" className={labelClasses}>
@@ -151,29 +126,7 @@ const SignUpPage = () => {
             )}
           </div>
 
-          {/* Confirm Password Field */}
-          <div>
-            <label htmlFor="confirmPassword" className={labelClasses}>
-              <Lock className="w-4 h-4" />
-              <span>Confirm Password</span>
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-              className={inputClasses}
-              placeholder="••••••••"
-            />
-            {errors.confirmPassword && (
-              <p className="mt-1 text-[var(--tech-white)] text-sm flex items-center gap-1">
-                <AlertCircle className="w-4 h-4" />
-                {errors.confirmPassword}
-              </p>
-            )}
-          </div>
-
-          {/* Auth Error Message */}
+          {/* Error Message */}
           {authError && (
             <div className="bg-[var(--vintage-brown)]/20 border border-[var(--vintage-brown)]/50 rounded-lg p-4 text-[var(--tech-white)] flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -181,39 +134,43 @@ const SignUpPage = () => {
             </div>
           )}
 
-          {/* Success Message */}
-          {isSuccess && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-[var(--vintage-sage)]/20 border border-[var(--vintage-sage)]/50 rounded-lg p-4 text-[var(--tech-white)] flex items-center gap-2"
-            >
-              <Check className="w-5 h-5" />
-              <span>Account created successfully! Redirecting...</span>
-            </motion.div>
-          )}
-
           {/* Submit Button */}
           <motion.button
             type="submit"
-            disabled={isSubmitting || isSuccess}
+            disabled={isSubmitting}
             className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
-              isSubmitting || isSuccess
+              isSubmitting
                 ? 'bg-gray-500 cursor-not-allowed'
                 : 'bg-blue-400 hover:bg-blue-500 text-[var(--vintage-brown)]'
             }`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {isSubmitting ? 'Creating Account...' : 'Create Account'}
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
+          </motion.button>
+
+          {/* Anonymous Login Button */}
+          <motion.button
+            type="button"
+            onClick={handleAnonymousLogin}
+            disabled={isSubmitting}
+            className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+              isSubmitting
+                ? 'bg-gray-500 cursor-not-allowed'
+                : 'bg-gray-600 hover:bg-gray-700 text-white'
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {isSubmitting ? 'Signing In...' : 'Continue as Guest'}
           </motion.button>
         </form>
 
         <div className="mt-8 text-center">
           <p className="text-[var(--vintage-cream)]">
-            Already have an account?{' '}
-            <Link to="/login" className="text-[var(--tech-white)] hover:text-[var(--vintage-cream)] font-medium">
-              Sign in
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-[var(--tech-white)] hover:text-[var(--vintage-cream)] font-medium">
+              Sign up
             </Link>
           </p>
         </div>
@@ -222,4 +179,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default LoginPage;

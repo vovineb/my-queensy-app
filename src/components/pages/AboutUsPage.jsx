@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Instagram, Linkedin, Twitter, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 // Using profile images from public directory
-const byronProfile = '/images/byron_profile.jpg';
+const byronProfile = '/images/byron.jpg';
 const georgeProfile = '/images/george_profile.jpg';
 const wendyProfile = '/images/wendy_profile.jpg';
 
@@ -408,6 +408,57 @@ const AboutUsPage = () => {
         </section>
       </div>
     </main>
+  );
+};
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await contactService.submitForm(formData);
+      if (response.success) {
+        // Show success message
+      }
+    } catch (error) {
+      // Handle error
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="contact-form p-8 space-y-6">
+      {/* Form fields */}
+      <button type="submit" className="btn btn-primary w-full">
+        Send Message
+      </button>
+    </form>
+  );
+};
+
+const TeamMember = ({ name, role, image, bio }) => {
+  return (
+    <div className="team-card">
+      <div className="card-front">
+        <div className="image-container h-48 overflow-hidden rounded-xl">
+          <img 
+            src={image} 
+            alt={name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div className="card-content mt-4">
+          <h3 className="text-xl font-bold">{name}</h3>
+          <p className="text-gray-600">{role}</p>
+        </div>
+      </div>
+    </div>
   );
 };
 

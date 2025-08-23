@@ -2,6 +2,8 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
+import { getStorage } from 'firebase/storage';
 import { Check, AlertCircle, Info, X } from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -13,6 +15,8 @@ import PropertyDetailPage from './components/pages/PropertyDetailPage';
 import HomePage from './components/pages/HomePage';
 import ContactPage from './components/pages/ContactPage';
 import SignUpPage from './components/pages/SignUpPage';
+import LoginPage from './components/pages/LoginPage';
+import UserBookings from './components/booking/UserBookings';
 import ScrollToTop from './components/common/ScrollToTop';
 
 import BlogPage from './components/blog/BlogPage';
@@ -31,7 +35,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
+export const database = getDatabase(app);
+export const storage = getStorage(app);
 
 // BlogDetail wrapper to handle slug parameter
 const BlogDetailWrapper = () => {
@@ -257,6 +263,8 @@ const AppContent = () => {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/bookings" element={<UserBookings />} />
   
         </Routes>
       </Suspense>

@@ -7,13 +7,17 @@ import { motion } from 'framer-motion';
 import { Calendar, Users, CreditCard, Check, AlertCircle, Mail, User } from 'lucide-react';
 import { DateRange } from 'react-date-range';
 import { addDays, format, differenceInCalendarDays } from 'date-fns';
+import { database } from '../../config/firebase';
+import { ref, push } from 'firebase/database';
 
-const BookingForm = ({ propertyId, property, onBookingComplete }) => {
+const BookingForm = ({ property, onBookingComplete }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     guests: 1,
+    checkIn: null,
+    checkOut: null
   });
   const [bookingReference, setBookingReference] = useState('');
   const [authRequired, setAuthRequired] = useState(false);
@@ -148,7 +152,7 @@ const BookingForm = ({ propertyId, property, onBookingComplete }) => {
       // Check availability first
       setIsValidating(true);
       const isAvailable = await bookingService.checkDateAvailability(
-        propertyId,
+        property.id,
         dateRange[0].startDate,
         dateRange[0].endDate
       );
@@ -164,7 +168,7 @@ const BookingForm = ({ propertyId, property, onBookingComplete }) => {
       
       // Create booking
       const bookingData = {
-        propertyId,
+        propertyId: property.id,
         checkIn: dateRange[0].startDate.toISOString(),
         checkOut: dateRange[0].endDate.toISOString(),
         guests: formData.guests,
@@ -179,6 +183,34 @@ const BookingForm = ({ propertyId, property, onBookingComplete }) => {
       if (result.success) {
         setBookingReference(result.booking.bookingReference);
         setSuccess(true);
+        
+        // Save booking to Firebase
+        try {
+          const user = getCurrentUser();
+          if (user) {
+            const bookingData = {
+              propertyId: property.id,
+              propertyName: property.name || property.title,
+              location: property.location,
+              checkIn: dateRange[0].startDate.toISOString(),
+              checkOut: dateRange[0].endDate.toISOString(),
+              guests: formData.guests,
+              totalPrice: pricing.totalPrice,
+              guestName: formData.name,
+              guestEmail: formData.email,
+              guestPhone: formData.phone,
+              specialRequests: formData.message || '',
+              bookingDate: new Date().toISOString(),
+              status: 'confirmed'
+            };
+            
+            // Save to user's bookings
+            const userBookingsRef = ref(database, `bookings/${user.uid}`);
+            await push(userBookingsRef, bookingData);
+          }
+        } catch (firebaseError) {
+          console.error('Error saving booking to Firebase:', firebaseError);
+        }
         
         // Call parent callback
         if (onBookingComplete) {

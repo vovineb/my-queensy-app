@@ -15,8 +15,8 @@ const Button = ({
 }) => {
   // Consistent variant styles using theme variables
   const variantStyles = {
-    primary: 'bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] shadow-md hover:shadow-lg',
-    secondary: 'bg-[var(--card-bg)] text-[var(--text-primary)] border border-[var(--border-light)] hover:bg-[var(--bg-secondary)] shadow-sm hover:shadow-md',
+    primary: 'bg-[var(--vintage-sage)] text-[var(--tech-white)] hover:bg-[var(--vintage-brown)] shadow-md hover:shadow-lg border border-[var(--vintage-sage)] hover:border-[var(--vintage-brown)]',
+    secondary: 'bg-transparent text-[var(--vintage-sage)] hover:bg-[var(--vintage-sage)] hover:text-[var(--tech-white)] shadow-md hover:shadow-lg border border-[var(--vintage-sage)]',
     outline: 'bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
     ghost: 'bg-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)]',
     danger: 'bg-[var(--color-error)] text-white hover:bg-red-600 shadow-md hover:shadow-lg',
@@ -24,20 +24,20 @@ const Button = ({
     warning: 'bg-[var(--color-warning)] text-white hover:bg-yellow-600 shadow-md hover:shadow-lg',
   };
 
-  // Size styles with better spacing
+  // Size styles with better spacing and mobile responsiveness
   const sizeStyles = {
-    small: 'py-2 px-6 text-sm rounded-lg min-h-[40px]',
-    medium: 'py-3 px-8 text-base rounded-xl min-h-[48px]',
-    large: 'py-4 px-10 text-lg rounded-2xl min-h-[56px]',
+    small: 'py-2 px-6 text-sm rounded-lg min-h-[40px] w-full sm:w-auto',
+    medium: 'py-3 px-8 text-base rounded-xl min-h-[48px] w-full sm:w-auto',
+    large: 'py-4 px-10 text-lg rounded-2xl min-h-[56px] w-full sm:w-auto',
   };
 
   // Base classes for all buttons
-  const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95';
 
   // Disabled styles
   const disabledStyles = disabled || isLoading
     ? 'opacity-70 cursor-not-allowed'
-    : 'transform hover:scale-105 active:scale-95';
+    : '';
 
   // Icon rendering
   const renderIcon = () => {
@@ -50,38 +50,43 @@ const Button = ({
     );
   };
 
+  // Combine all classes
+  const combinedClasses = [
+    baseClasses,
+    variantStyles[variant],
+    sizeStyles[size],
+    disabledStyles,
+    className
+  ].filter(Boolean).join(' ');
+
   // Loading spinner
-  const renderSpinner = () => (
+  const LoadingSpinner = () => (
     <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
     </svg>
   );
 
-  // Combine all styles
-  const buttonStyles = `
-    ${baseClasses}
-    ${variantStyles[variant]}
-    ${sizeStyles[size]}
-    ${disabledStyles}
-  `.trim();
-
-  // Use motion.button for animations
-  const Component = as === 'button' ? motion.button : motion[as];
+  // Determine the element to render
+  const Component = as;
 
   return (
-    <Component
-      className={buttonStyles}
-      disabled={disabled || isLoading}
-      whileHover={!disabled && !isLoading ? { scale: 1.02, y: -1 } : {}}
-      whileTap={!disabled && !isLoading ? { scale: 0.98 } : {}}
-      {...props}
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-block"
     >
-      {isLoading && renderSpinner()}
-      {icon && iconPosition === 'left' && renderIcon()}
-      {children}
-      {icon && iconPosition === 'right' && renderIcon()}
-    </Component>
+      <Component
+        className={combinedClasses}
+        disabled={disabled || isLoading}
+        {...props}
+      >
+        {isLoading && <LoadingSpinner />}
+        {icon && iconPosition === 'left' && renderIcon()}
+        {children}
+        {icon && iconPosition === 'right' && renderIcon()}
+      </Component>
+    </motion.div>
   );
 };
 

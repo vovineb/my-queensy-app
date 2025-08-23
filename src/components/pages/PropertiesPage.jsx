@@ -64,6 +64,23 @@ const PropertiesPage = () => {
       images: ['/images/q.jpg', '/images/q1.jpg', '/images/q2.jpg'],
       rating: 5.0,
       reviews: 67
+    },
+    {
+      id: 4,
+      name: "New Villa",
+      type: 'Villa',
+      location: 'Watamu',
+      price: 20000,
+      originalPrice: 20000,
+      discountedPrice: 20000,
+      bedrooms: 4,
+      bathrooms: 3,
+      maxGuests: 10,
+      description: 'Beautiful villa with 4 bedrooms and 3 bathrooms, perfect for large groups or families.',
+      amenities: ['WiFi', 'Coffee Maker', 'Free Parking', 'Security', 'Pool Access', 'Beach Equipment'],
+      images: ['/images/w.jpg', '/images/w1.jpg', '/images/w2.jpg', '/images/w3.jpg', '/images/w4.jpg', '/images/w5.jpg', '/images/w6.jpg', '/images/w7.jpg'],
+      rating: 5.0,
+      reviews: 10
     }
   ];
 

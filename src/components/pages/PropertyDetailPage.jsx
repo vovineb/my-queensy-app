@@ -31,6 +31,14 @@ const q6Image = '/images/q6.jpg';
 const q7Image = '/images/q7.jpg';
 const q8Image = '/images/q8.jpg';
 const q9Image = '/images/q9.jpg';
+const wImage = '/images/w.jpg';
+const w1Image = '/images/w1.jpg';
+const w2Image = '/images/w2.jpg';
+const w3Image = '/images/w3.jpg';
+const w4Image = '/images/w4.jpg';
+const w5Image = '/images/w5.jpg';
+const w6Image = '/images/w6.jpg';
+const w7Image = '/images/w7.jpg';
 
 const PropertyDetailPage = () => {
   const { id } = useParams();
@@ -128,6 +136,33 @@ const PropertyDetailPage = () => {
         'Fully equipped gourmet kitchen',
         'Concierge service for personalized assistance'
       ]
+    },
+    4: {
+      id: 4,
+      title: 'Watamu Villa',
+      fullDescription: 'Experience luxury and comfort in our beautiful Watamu Villa. This stunning 4-bedroom, 3-bathroom villa is perfect for large groups or families seeking a memorable vacation. With breathtaking views and premium amenities, you\'ll enjoy the ultimate beachfront experience in Watamu.',
+      shortDescription: 'Beautiful villa with 4 bedrooms and 3 bathrooms, perfect for large groups or families.',
+      images: [wImage, w1Image, w2Image, w3Image, w4Image, w5Image, w6Image, w7Image],
+      bedrooms: 4,
+      bathrooms: 3,
+      maxGuests: 8,
+      price: 20000,
+      originalPrice: 20000,
+      discountedPrice: 18000,
+      amenities: [
+        'Beach Front', 'WiFi', 'Kitchen', 'Ocean View', 'Air Conditioning',
+        'Security', 'Daily Housekeeping', 'Beach Towels', 'Free Parking',
+        'Private Pool', 'Garden', 'BBQ Area'
+      ],
+      location: 'Watamu',
+      features: [
+        'Spacious living areas with ocean views',
+        'Four comfortable bedrooms with premium bedding',
+        'Three modern bathrooms with premium fixtures',
+        'Large private pool and garden area',
+        'Fully equipped gourmet kitchen',
+        'Outdoor BBQ area for entertaining'
+      ]
     }
   };
 
@@ -189,9 +224,9 @@ const PropertyDetailPage = () => {
           aria-labelledby="image-gallery-heading"
         >
           <h2 id="image-gallery-heading" className="sr-only">Property Image Gallery</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
             {/* Main Image with Auto-scroll - Takes 3/4 of left side */}
-            <figure className="lg:col-span-2 space-y-4">
+            <figure className="lg:col-span-3 space-y-6">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden relative">
                 <img
                   src={property.images[selectedImage]}
@@ -206,14 +241,14 @@ const PropertyDetailPage = () => {
               </div>
               
               {/* Thumbnail Grid */}
-              <figcaption className="grid grid-cols-4 gap-2">
+              <figcaption className="grid grid-cols-4 sm:grid-cols-8 gap-3">
                 {property.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
                     className={`aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
-                      selectedImage === index 
-                        ? 'ring-4 ring-[var(--vintage-sage)] scale-105' 
+                      selectedImage === index
+                        ? 'ring-4 ring-[var(--vintage-sage)] scale-105'
                         : 'hover:scale-105'
                     }`}
                     aria-label={`View image ${index + 1} of ${property.images.length}`}
@@ -230,10 +265,10 @@ const PropertyDetailPage = () => {
             </figure>
 
             {/* Property Details - Takes remaining 1/4 */}
-            <section className="lg:col-span-1 space-y-4" aria-labelledby="property-details-heading">
+            <section className="lg:col-span-1 space-y-6" aria-labelledby="property-details-heading">
               <div className="bg-[var(--vintage-cream)] p-6 rounded-2xl border border-[var(--vintage-sage)]/20 shadow-lg">
                 <h2 id="property-details-heading" className="text-xl font-bold text-[var(--vintage-brown)] mb-4">Property Highlights</h2>
-                <dl className="grid grid-cols-2 gap-3 mb-4">
+                <dl className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex items-center gap-2">
                     <Bed className="w-5 h-5 text-[var(--vintage-sage)]" aria-hidden="true" />
                     <dt className="sr-only">Bedrooms</dt>
@@ -319,7 +354,7 @@ const PropertyDetailPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8"
           aria-labelledby="amenities-features-heading"
         >
           <h2 id="amenities-features-heading" className="sr-only">Amenities and Features</h2>
